@@ -1,23 +1,29 @@
+Bases de datos de hoteles:
+
 CREATE TABLE Tipo(ID UNIQUE NOT NULL, Nombre varchar(30) NOT NULL);
 
 CREATE TABLE Factura(ID int AUTOINCREMENT UNIQUE NOT NULL, Precio FLOAT(6,2) NOT NULL, Tipo int NOT NULL, Fecha_Generacion DATE NOT NULL, Hecha tinyint NOT NULL, FOREIGN KEY(Tipo) REFERENCES Tipo(ID) ON DELETE NO ACTION ON UPDATE NO ACTION);
 
 CREATE TABLE Area(ID int UNIQUE NOT NULL, Nombre varchar(30));
 
-CREATE TABLE Empleado(ID int AUTO_INCREMENT UNIQUE NOT NULL, Paga_dia int NOT NULL, Area int NOT NULL, FOREGIN KEY(Area) REFERENCES Area(ID) ON DELETE NO ACTION);
+CREATE TABLE Empleado(ID int AUTOINCREMENT UNIQUE NOT NULL, Paga_dia int NOT NULL, Area int NOT NULL, FOREGIN KEY(Area) REFERENCES Area(ID) ON DELETE NO ACTION);
 
-CREATE TABLE Usuario(ID int UNIQUE NOT NULL, Nombre varchar(30) NOT NULL, Empleado int, Admin tinyint NOT NULL, FOREIGN KEY(Empleado) REFERENCES Empleado(ID) ON DELETE NO ACTION ON UPDATE CASCADE);
+CREATE TABLE Habitacion(ID int UNIQUE NOT NULL, Limpio tinyint NOT NULL, Disponible tinyint NOT NULL, Precio FLOAT(6,2) NOT NULL, Capacidad int NOT NULL, UltimaModificacion DATE NOT NULL, ModificadoPor varchar(30) NOT NULL);
 
-CREATE TABLE Habitacion(ID int UNIQUE NOT NULL, Limpio tinyint NOT NULL, Disponible tinyint NOT NULL, Precio FLOAT(6,2) NOT NULL, Capacidad int NOT NULL, UltimaModificacion DATE NOT NULL, ModificadoPor int NOT NULL, FOREING KEY(ModificadoPor) REFERENCES Usuario(ID) ON DELETE NO ACTION);
+CREATE TABLE Precio_Temporada(ID int AUTOINCREMENT UNIQUE NOT NULL, Precio FLOAT(6,2) NOT NULL, Fecha_Inicio DATE NOT NULL, Fecha_Termino DATE NOT NULL, UltimaModificacion DATE NOT NULL, ModificadoPor varchar(30) NOT NULL);
 
-CREATE TABLE Precio_Temporada(ID int AUTO_INCREMENT UNIQUE NOT NULL, Precio FLOAT(6,2) NOT NULL, Fecha_Inicio DATE NOT NULL, Fecha_Termino DATE NOT NULL, UltimaModificacion DATE NOT NULL, ModificadoPor int NOT NULL, FOREING KEY(ModificadoPor) REFERENCES Usuario(ID) ON DELETE NO ACTION);
+CREATE TABLE Cliente(ID int AUTOINCREMENT UNIQUE NOT NULL, Nombre varchar(40) NOT NULL, Correo varchar(50) NOT NULL, RFC varchar(14) NOT NULL, Telefono int NOT NULL, Descuento_Especial FLOAT(6,2), UltimaModificacion DATE NOT NULL, ModificadoPor varchar(30) NOT NULL);
 
-CREATE TABLE Cliente(ID int AUTOINCREMENT UNIQUE NOT NULL, Nombre varchar(40) NOT NULL, Correo varchar(50) NOT NULL, RFC varchar(14) NOT NULL, Telefono int NOT NULL, Descuento_Especial FLOAT(6,2), UltimaModificacion DATE NOT NULL, ModificadoPor int NOT NULL, FOREING KEY(ModificadoPor) REFERENCES Usuario(ID) ON DELETE NO ACTION);
+CREATE TABLE Registro_Habitaciones(Habitacion int UNIQUE, Fecha DATE NOT NULL, Cliente int NOT NULL, UltimaModificacion DATE NOT NULL, ModificadoPor varchar(30) NOT NULL, FOREIGN KEY(Cliente) REFERENCES Cliente(ID) ON DELETE NO ACTION ON UPDATE CASCADE);
 
-CREATE TABLE Registro_Habitaciones(Habitacion int UNIQUE, Fecha DATE NOT NULL, Cliente int NOT NULL, UltimaModificacion DATE NOT NULL, ModificadoPor int NOT NULL, FOREIGN KEY(Cliente) REFERENCES Cliente(ID) ON DELETE NO ACTION ON UPDATE CASCADE, FOREING KEY(ModificadoPor) REFERENCES Usuario(ID) ON DELETE NO ACTION);
-
-CREATE TABLE Reservacion(ID int UNIQUE NOT NULL, Cliente int NOT NULL, Fecha DATE NOT NULL, No_Personas int NOT NULL, Cantidad_Pagada float(6,2) NOT NULL, UltimaModificacion DATE NOT NULL, ModificadoPor int NOT NULL, FOREIGN KEY(Cliente) REFERENCES Cliente(ID) ON DELETE NO ACTION ON UPDATE CASCADE, FOREIGN KEY(ModificadoPor) REFERENCES Usuario(ID) ON DELETE NO ACTION ON UPDATE CASCADE);
+CREATE TABLE Reservacion(ID int UNIQUE NOT NULL, Cliente int NOT NULL, Fecha DATE NOT NULL, No_Personas int NOT NULL, Cantidad_Pagada float(6,2) NOT NULL, UltimaModificacion DATE NOT NULL, ModificadoPor varchar(30) NOT NULL, FOREIGN KEY(Cliente) REFERENCES Cliente(ID) ON DELETE NO ACTION ON UPDATE CASCADE);
 
 CREATE TABLE Producto(ID int UNIQUE NOT NULL, Nombre varchar(30) NOT NULL, Precio FLOAT(6,2) NOT NULL, Cantidad int NOT NULL);
 
-CREATE TABLE Inventario(Area int UNIQUE NOT NULL, Producto int NOT NULL, FOREIGN KEY(Area) REFERENCES Area(ID), FOREIGN KEY(Producto) REFERENCES Producto(ID), UltimaModificacion DATE NOT NULL, ModificadoPor int NOT NULL, FOREIGN KEY(ModificadoPor) REFERENCES Usuario(ID) ON DELETE NO ACTION ON UPDATE CASCADE);
+CREATE TABLE Inventario(Area int UNIQUE NOT NULL, Producto int NOT NULL, FOREIGN KEY(Area) REFERENCES Area(ID), FOREIGN KEY(Producto) REFERENCES Producto(ID), UltimaModificacion DATE NOT NULL, ModificadoPor varchar(30) NOT NULL);
+
+Base de datos de usuarios:
+
+CREATE TABLE Hotel(ID int UNIQUE NOT NULL AUTOINCREMENT, Nombre varchar(30) NOT NULL);
+
+CREATE TABLE Usuarios(ID int UNIQUE NOT NULL AUTOINCREMENT, Nombre varchar(30) NOT NULL, Administrador tinyint NOT NULL, Hotel int NOT NULL, Password varchar(30) NOT NULL, FOREIGN KEY(Hotel) REFERENCES Hotel(ID) ON DELETE NO ACTION);
