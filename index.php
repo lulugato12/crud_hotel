@@ -2,17 +2,43 @@
 <html lang="en">
 	<head>
 			<meta 	charset="utf-8">
-			<link   href="css/bootstrap.min.css" rel="stylesheet">
-			<script src="js/bootstrap.min.js"></script>
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 	</head>
-
 	<body>
 		<div class="container">
+			<!-- cabeza -->
 			<div class="row">
-				<!-- cargar informacion del hotel -->
-				<h3>Bienvenido al Hotel</h3>
+				<div class="col-sm-8">
+					<!-- cargar informacion del hotel -->
+					<h1>Bienvenido al Hotel</h1>
+				</div>
+				<div class="col-sm-4">
+					<!-- cargar informacion del usuario -->
+					<h3>Datos del usuario</h3>
+				</div>
 		</div>
+		<!-- cuerpo -->
 		<div class="row">
+			<div class="col-sm-3">
+				<!-- mostrar opciones -->
+				<h3 class="text-center">Menu</h3>
+				<div class="row">
+					<p class="text-center">Clientes</p>
+				</div>
+				<div class="row">
+					<p class="text-center">Empleados</p>
+				</div>
+				<div class="row">
+					<p class="text-center">Inventarios</p>
+				</div>
+				<div class="row">
+					<p class="text-center">Cerrar sesion</p>
+				</div>
+			</div>
+			<div class="col-sm-9">
+				<!-- mostrar informacion del hotel -->
+				<h3 class="text-center">Dashboard</h3>
+			</div>
 				<?php
 						/*include 'database.php';
 						   	$pdo = Database::connect();
@@ -34,6 +60,13 @@
 						   	Database::disconnect();*/
 				?>
 			</div>
+			<!-- pie de pagina -->
+			<div class="row">
+				<div class="col-sm-12">
+					<!-- Informacion varia -->
+					<p class="text-center">Creado por Jacqui y Lulu | 2019</p>
+				</div>
+		</div>
 		</div>
 	</body>
 </html>
