@@ -1,89 +1,25 @@
-Bases de datos de hoteles:
+CREATE TABLE Habitacion(ID int UNIQUE NOT NULL, Limpio tinyint NOT NULL, Disponible tinyint NOT NULL, Precio FLOAT(6,2) NOT NULL,Capacidad int NOT NULL);
 
-<<<<<<< HEAD
 CREATE TABLE Tipo(ID int UNIQUE NOT NULL, Nombre varchar(30) NOT NULL);
-||||||| merged common ancestors
-CREATE TABLE Tipo(ID AUTOINCREMENT UNIQUE NOT NULL, Nombre varchar(30) NOT NULL);
-=======
-CREATE TABLE Tipo(ID UNIQUE NOT NULL, Nombre varchar(30) NOT NULL);
->>>>>>> master
 
-<<<<<<< HEAD
 CREATE TABLE Precio_Temporada(ID int UNIQUE NOT NULL AUTO_INCREMENT, Precio FLOAT(6,2) NOT NULL, Fecha_Inicio DATE NOT NULL, Fecha_Termino DATE NOT NULL);
-||||||| merged common ancestors
-CREATE TABLE Precio_Temporada(ID int AUTOINCREMENT UNIQUE NOT NULL, Precio FLOAT(6,2) NOT NULL, Fecha_Inicio DATE NOT NULL, Fecha_Termino DATE NOT NULL);
-=======
-CREATE TABLE Factura(ID int AUTOINCREMENT UNIQUE NOT NULL, Precio FLOAT(6,2) NOT NULL, Tipo int NOT NULL, Fecha_Generacion DATE NOT NULL, Hecha tinyint NOT NULL, FOREIGN KEY(Tipo) REFERENCES Tipo(ID) ON DELETE NO ACTION ON UPDATE NO ACTION);
->>>>>>> master
 
-<<<<<<< HEAD
 CREATE TABLE Factura(ID int UNIQUE NOT NULL, Precio FLOAT(6,2) NOT NULL, Tipo int NOT NULL, Fecha_Generacion DATE NOT NULL, Hecha tinyint NOT NULL, FOREIGN KEY(Tipo) REFERENCES Tipo(ID) ON DELETE NO ACTION);
-||||||| merged common ancestors
-CREATE TABLE Factura(ID int AUTOINCREMENT UNIQUE NOT NULL, Precio FLOAT(6,2) NOT NULL, Tipo int NOT NULL, Fecha_Generacion DATE NOT NULL, Hecha tinyint NOT NULL, FOREIGN KEY(Tipo) REFERENCES Tipo(ID) ON DELETE NO ACTION);
-=======
-CREATE TABLE Area(ID int UNIQUE NOT NULL, Nombre varchar(30));
 
-CREATE TABLE Empleado(ID int AUTOINCREMENT UNIQUE NOT NULL, Paga_dia int NOT NULL, Area int NOT NULL, FOREGIN KEY(Area) REFERENCES Area(ID) ON DELETE NO ACTION);
->>>>>>> master
-
-<<<<<<< HEAD
 CREATE TABLE Cliente(ID int UNIQUE NOT NULL AUTO_INCREMENT, Nombre varchar(40) NOT NULL, Correo varchar(50) NOT NULL, RFC varchar(14) NOT NULL, Telefono int NOT NULL, Descuento_Especial FLOAT(6,2) NOT NULL);
-||||||| merged common ancestors
-CREATE TABLE Cliente(ID int AUTOINCREMENT UNIQUE NOT NULL, Nombre varchar(40) NOT NULL, Correo varchar(50) NOT NULL, RFC varchar(14) NOT NULL, Telefono int NOT NULL, Descuento_Especial FLOAT(6,2) NOT NULL);
-=======
-CREATE TABLE Habitacion(ID int UNIQUE NOT NULL, Limpio tinyint NOT NULL, Disponible tinyint NOT NULL, Precio FLOAT(6,2) NOT NULL, Capacidad int NOT NULL, UltimaModificacion DATE NOT NULL, ModificadoPor varchar(30) NOT NULL);
->>>>>>> master
 
-<<<<<<< HEAD
 CREATE TABLE Registro_Habitaciones(Habitacion int UNIQUE NOT NULL, Fecha DATE NOT NULL, Cliente int NOT NULL, FOREIGN KEY(Cliente) REFERENCES Cliente(ID) ON DELETE NO ACTION);
-||||||| merged common ancestors
-CREATE TABLE Registro_Habitaciones(Habitacion int UNIQUE, Fecha DATE NOT NULL, Cliente int NOT NULL, FOREIGN KEY())
-=======
-CREATE TABLE Precio_Temporada(ID int AUTOINCREMENT UNIQUE NOT NULL, Precio FLOAT(6,2) NOT NULL, Fecha_Inicio DATE NOT NULL, Fecha_Termino DATE NOT NULL, UltimaModificacion DATE NOT NULL, ModificadoPor varchar(30) NOT NULL);
->>>>>>> master
 
-<<<<<<< HEAD
 CREATE TABLE Hotel(ID int UNIQUE NOT NULL, Nombre varchar(30) NOT NULL);
 
 CREATE TABLE Usuarios(ID int UNIQUE NOT NULL, Nombre varchar(30) NOT NULL, Administrador TINYINT NOT NULL, Hotel int NOT NULL, Password varchar(35) NOT NULL, FOREIGN KEY(Hotel) REFERENCES Hotel(ID));
-||||||| merged common ancestors
-CREATE TABLE Usuario(ID int UNIQUE NOT NULL, Nombre varchar(30) NOT NULL);
-=======
-CREATE TABLE Cliente(ID int AUTOINCREMENT UNIQUE NOT NULL, Nombre varchar(40) NOT NULL, Correo varchar(50) NOT NULL, RFC varchar(14) NOT NULL, Telefono int NOT NULL, Descuento_Especial FLOAT(6,2), UltimaModificacion DATE NOT NULL, ModificadoPor varchar(30) NOT NULL);
->>>>>>> master
 
-CREATE TABLE Registro_Habitaciones(Habitacion int UNIQUE, Fecha DATE NOT NULL, Cliente int NOT NULL, UltimaModificacion DATE NOT NULL, ModificadoPor varchar(30) NOT NULL, FOREIGN KEY(Cliente) REFERENCES Cliente(ID) ON DELETE NO ACTION ON UPDATE CASCADE);
+CREATE TABLE Registro_Trabajadores(ID_Empleado int UNIQUE NOT NULL, Dias_Trabajados int NOT NULL FOREIGN KEY(ID_Empleado) REFERENCES Usuario(ID) ON DELETE NO ACTION);
 
-<<<<<<< HEAD
 CREATE TABLE Reservacion(ID int UNIQUE NOT NULL, Cliente int NOT NULL, Fecha DATE NOT NULL, No_Personas int NOT NULL, Cantidad_Pagada float(6,2) NOT NULL, UltimaModificacion DATE NOT NULL, ModificadoPor int NOT NULL, FOREIGN KEY(Cliente) REFERENCES Cliente(ID), FOREIGN KEY(ModificadoPor) REFERENCES Usuarios(ID));
-||||||| merged common ancestors
-CREATE TABLE Reservacion(ID int UNIQUE NOT NULL, Cliente int NOT NULL, Fecha DATE NOT NULL, No_Personas int NOT NULL, Cantidad_Pagada float(6,2) NOT NULL, UltimaModificacion DATE NOT NULL, ModificadoPor int NOT NULL, FOREIGN KEY(Cliente) REFERENCES Cliente(ID), FOREIGN KEY(ModificadoPor) REFERENCES Usuario(ID));
-=======
-CREATE TABLE Reservacion(ID int UNIQUE NOT NULL, Cliente int NOT NULL, Fecha DATE NOT NULL, No_Personas int NOT NULL, Cantidad_Pagada float(6,2) NOT NULL, UltimaModificacion DATE NOT NULL, ModificadoPor varchar(30) NOT NULL, FOREIGN KEY(Cliente) REFERENCES Cliente(ID) ON DELETE NO ACTION ON UPDATE CASCADE);
->>>>>>> master
 
 CREATE TABLE Producto(ID int UNIQUE NOT NULL, Nombre varchar(30) NOT NULL, Precio FLOAT(6,2) NOT NULL, Cantidad int NOT NULL);
 
-CREATE TABLE Inventario(Area int UNIQUE NOT NULL, Producto int NOT NULL, FOREIGN KEY(Area) REFERENCES Area(ID), FOREIGN KEY(Producto) REFERENCES Producto(ID), UltimaModificacion DATE NOT NULL, ModificadoPor varchar(30) NOT NULL);
+CREATE TABLE Area(ID int UNIQUE NOT NULL, Nombre varchar(30));
 
-Base de datos de usuarios:
-
-CREATE TABLE Hotel(ID int UNIQUE NOT NULL AUTOINCREMENT, Nombre varchar(30) NOT NULL);
-
-<<<<<<< HEAD
 CREATE TABLE Inventario(Area int UNIQUE NOT NULL, Producto int NOT NULL, FOREIGN KEY(Area) REFERENCES Area(ID), FOREIGN KEY(Producto) REFERENCES Producto(ID));
-
-Tablas en las que corregí errores:
-
-Precio_Temporada
-Factura
-Cliente
-Registro_Habitaciones
-Usuario
-
-Reservación
-||||||| merged common ancestors
-CREATE TABLE Inventario(Area int UNIQUE NOT NULL, Producto int NOT NULL, FOREIGN KEY(Area) REFERENCES Area(ID), FOREIGN KEY(Producto) REFERENCES Producto(ID));
-=======
-CREATE TABLE Usuarios(ID int UNIQUE NOT NULL AUTOINCREMENT, Nombre varchar(30) NOT NULL, Administrador tinyint NOT NULL, Hotel int NOT NULL, Password varchar(30) NOT NULL, FOREIGN KEY(Hotel) REFERENCES Hotel(ID) ON DELETE NO ACTION);
->>>>>>> master
