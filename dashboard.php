@@ -23,13 +23,13 @@
 				<!-- mostrar opciones -->
 				<h3 class="text-center">Menu</h3>
 				<div class="row">
-					<p class="text-center">Clientes</p>
+					     <a href="clientes.php"><p class="text-center">Clientes</p></a>
 				</div>
 				<div class="row">
-					<p class="text-center">Empleados</p>
+          <a href="empleados.php"><p class="text-center">Empleados</p></a>
 				</div>
 				<div class="row">
-					<p class="text-center">Inventarios</p>
+          <a href="inventarios.php"><p class="text-center">Inventarios</p></a>
 				</div>
 				<div class="row">
 					<p class="text-center">Cerrar sesion</p>
