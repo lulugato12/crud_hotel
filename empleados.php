@@ -54,7 +54,7 @@
 					<?php
 						include 'database.php';
 						   	$pdo = Database::connect();
-						   	$sql = 'SELECT * FROM Trabajador natural join Area WHERE Trabajador.Area = Area.ID';
+						   	$sql = 'SELECT Trabajador.ID as ID, Trabajador.Nombre, Area.Nombre as Area FROM Trabajador join Area on Trabajador.Area = Area.ID ORDER BY ID';
 		 				   	foreach ($pdo->query($sql) as $row) {
 								echo '<tr>';
 	    					   	echo '<td>'. $row['Nombre'] . '</td>';
