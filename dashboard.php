@@ -49,7 +49,20 @@
 					Database::disconnect();*/
 				?>
 			<div class="col-sm-3">
-				<h3 class="text-center">Facturas</h3>
+				<div class="row">
+					<h3 class="text-center">Facturas</h3>
+				</div>
+				<div class="row">
+					<?php
+						include 'database.php';
+						$pdo = Database::connect();
+						$sql = 'SELECT * FROM facturas WHERE Hecha = false';
+			 			foreach ($pdo->query($sql) as $row) {
+
+						}
+						Database::disconnect();
+					?>
+				</div>
 			</div>
 		</div>
 			<!-- pie de pagina -->
