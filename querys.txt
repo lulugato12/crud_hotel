@@ -10,9 +10,9 @@ CREATE TABLE Factura(ID int UNIQUE NOT NULL, Precio FLOAT(6,2) NOT NULL, Tipo in
 
 CREATE TABLE Cliente(ID int UNIQUE NOT NULL AUTO_INCREMENT, Nombre varchar(30) NOT NULL, Correo varchar(30), RFC varchar(14), Telefono int);
 
-CREATE TABLE Registro_Habitaciones(Habitaciones int UNIQUE NOT NULL, Fecha DATE NOT NULL, Cliente int NOT NULL, No_personas int NOT NULL, FOREIGN KEY(Cliente) REFERENCES Cliente(ID) ON DELETE NO ACTION);
+CREATE TABLE Registro_Habitaciones(Habitaciones int UNIQUE NOT NULL, Fecha DATE NOT NULL, Cliente int, No_personas int NOT NULL, FOREIGN KEY(Cliente) REFERENCES Cliente(ID) ON DELETE SET NULL ON UPDATE CASCADE);
 
-CREATE TABLE Reservacion(ID int UNIQUE NOT NULL, Cliente int NOT NULL, Fecha DATE NOT NULL, No_Personas int NOT NULL, Cantidad_Pagada float(6,2) NOT NULL, UltimaModificacion DATE NOT NULL, FOREIGN KEY(Cliente) REFERENCES Cliente(ID));
+CREATE TABLE Reservacion(ID int UNIQUE NOT NULL, Cliente int, Fecha DATE NOT NULL, No_Personas int NOT NULL, Cantidad_Pagada float(6,2) NOT NULL, UltimaModificacion DATE NOT NULL, FOREIGN KEY(Cliente) REFERENCES Cliente(ID) ON DELETE SET NULL ON UPDATE CASCADE);
 
 CREATE TABLE Producto(ID int UNIQUE NOT NULL, Nombre varchar(30) NOT NULL, Precio FLOAT(6,2) NOT NULL, Cantidad int NOT NULL);
 
