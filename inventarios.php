@@ -29,9 +29,6 @@
           <a href="reservacion.php"><p class="text-center">Reservacion</p></a>
 				</div>
 				<div class="row">
-          <a href="ingresos.php"><p class="text-center">Ingresos</p></a>
-				</div>
-				<div class="row">
 					     <a href="clientes.php"><p class="text-center">Clientes</p></a>
 				</div>
 				<div class="row">

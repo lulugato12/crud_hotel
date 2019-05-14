@@ -29,9 +29,6 @@
           <a href="reservacion.php"><p class="text-center">Reservacion</p></a>
 				</div>
 				<div class="row">
-          <a href="ingresos.php"><p class="text-center">Ingresos</p></a>
-				</div>
-				<div class="row">
 					     <a href="clientes.php"><p class="text-center">Clientes</p></a>
 				</div>
 				<div class="row">
@@ -66,9 +63,10 @@
 								$pdo = Database::connect();
 								$sql = 'SELECT * FROM Habitacion';
 					 			foreach ($pdo->query($sql) as $row) {
-									echo '<tr><td>'.$row['ID'].'</td>';
-									echo '<td>'.$row['Disponible'] == 'true'?'Libre':'Ocupado';
-									echo '</td><td><button type="button" class="btn btn-info">Detalles</button><button type="button" class="btn btn-danger">Hecha</button></td></tr>';
+									echo '<tr><td>'.$row['ID'].'</td><td>';
+									echo $row['Disponible'] == 'true'?'Libre':'Ocupado';
+									echo '</td><td><button type="button" class="btn btn-primary">Check-in</button><button type="button" class="btn btn-success">Check-out</button><button type="button" class="btn btn-info">Detalles</button>';
+									echo '</td></tr>';
 								}
 								Database::disconnect();
 							?>
