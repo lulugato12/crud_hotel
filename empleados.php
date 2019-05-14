@@ -26,6 +26,12 @@
 					     <a href="dashboard.php"><p class="text-center">Inicio</p></a>
 				</div>
 				<div class="row">
+          <a href="reservacion.php"><p class="text-center">Reservacion</p></a>
+				</div>
+				<div class="row">
+          <a href="ingresos.php"><p class="text-center">Ingresos</p></a>
+				</div>
+				<div class="row">
 					     <a href="clientes.php"><p class="text-center">Clientes</p></a>
 				</div>
 				<div class="row">

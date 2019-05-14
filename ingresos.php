@@ -43,7 +43,7 @@
 			</div>
 			<div class="col-sm-9">
 				<!-- mostrar informacion del hotel -->
-				<h3 class="text-center">Inventarios</h3>
+				<h3 class="text-center">Ingresos</h3>
 			</div>
         <!-- vista previa inventarios -->
 				<?php
