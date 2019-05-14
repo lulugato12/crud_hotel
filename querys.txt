@@ -1,62 +1,27 @@
-	CREATE TABLE Habitacion(ID int UNIQUE NOT NULL, Limpio tinyint NOT NULL, Disponible tinyint NOT NULL, Precio FLOAT(6,2) NOT NULL, Capacidad int NOT NULL);
+CREATE TABLE Habitacion(ID int UNIQUE NOT NULL, Limpio tinyint NOT NULL, Disponible tinyint NOT NULL, Precio FLOAT(6,2) NOT NULL, Capacidad int NOT NULL);
 
-	CREATE TABLE Tipo_factura(ID int UNIQUE NOT NULL, Nombre varchar(30) NOT NULL);
+CREATE TABLE Tipo_factura(ID int UNIQUE NOT NULL, Nombre varchar(30) NOT NULL);
 
-	CREATE TABLE Metodo_pago(ID int UNIQUE NOT NULL, Nombre varchar(30) NOT NULL);
+CREATE TABLE Metodo_pago(ID int UNIQUE NOT NULL, Nombre varchar(30) NOT NULL);
 
-	CREATE TABLE Descuento_Temporada(ID int UNIQUE NOT NULL AUTO_INCREMENT, Descuento FLOAT(6,2) NOT NULL, Fecha_Inicio DATE NOT NULL, Fecha_Termino DATE NOT NULL);
+CREATE TABLE Descuento_Temporada(ID int UNIQUE NOT NULL AUTO_INCREMENT, Descuento FLOAT(6,2) NOT NULL, Fecha_Inicio DATE NOT NULL, Fecha_Termino DATE NOT NULL);
 
-	CREATE TABLE Cliente(ID int UNIQUE NOT NULL AUTO_INCREMENT, Nombre varchar(30) NOT NULL, Correo varchar(30), RFC varchar(14), Telefono int);
+CREATE TABLE Cliente(ID int UNIQUE NOT NULL AUTO_INCREMENT, Nombre varchar(30) NOT NULL, Correo varchar(30), RFC varchar(14), Telefono int);
 
-<<<<<<< HEAD
-	CREATE TABLE Factura(ID int UNIQUE NOT NULL, Cliente int, Precio FLOAT(6,2) NOT NULL, Tipo int NOT NULL, Fecha_Generacion DATE NOT NULL, Hecha tinyint NOT NULL, Metodo_pago int NOT NULL, FOREIGN KEY(Tipo) REFERENCES Tipo_factura(ID) ON DELETE NO ACTION ON UPDATE NO ACTION, FOREIGN KEY(Metodo_pago) REFERENCES Metodo_pago(ID) ON DELETE NO ACTION ON UPDATE NO ACTION, FOREIGN KEY(Cliente) REFERENCES Cliente(ID) ON DELETE SET NULL ON UPDATE CASCADE);
-||||||| merged common ancestors
-CREATE TABLE Factura(ID int UNIQUE NOT NULL, Cliente int, Precio FLOAT(6,2) NOT NULL, Tipo int NOT NULL, Fecha_Generacion DATE NOT NULL, Hecha tinyint NOT NULL, Metodo_pago int NOT NULL, FOREIGN KEY(Tipo) REFERENCES Tipo_factura(ID) ON DELETE NO ACTION ON UPDATE NO ACTION, FOREIGN KEY(Metodo_pago) REFERENCES Metodo_pago(ID) ON DELETE NO ACTION ON UPDATE NO ACTION, FOREIGN KEY(Cliente) REFERENCES Cliente(ID) ON DELETE SET NULL ON UPDATE CASCADE);
-=======
+CREATE TABLE Trabajador(ID int UNIQUE NOT NULL AUTO_INCREMENT, Nombre varchar(30) NOT NULL, Pago_dia FLOAT(6,2) NOT NULL, Cumple DATE NOT NULL);
+
 CREATE TABLE Factura(ID int UNIQUE NOT NULL AUTO_INCREMENT, Cliente int, Precio FLOAT(6,2) NOT NULL, Tipo int NOT NULL, Fecha_Generacion DATE NOT NULL, Hecha tinyint NOT NULL, Metodo_pago int NOT NULL, FOREIGN KEY(Tipo) REFERENCES Tipo_factura(ID) ON DELETE NO ACTION ON UPDATE NO ACTION, FOREIGN KEY(Metodo_pago) REFERENCES Metodo_pago(ID) ON DELETE NO ACTION ON UPDATE NO ACTION, FOREIGN KEY(Cliente) REFERENCES Cliente(ID) ON DELETE SET NULL ON UPDATE CASCADE);
->>>>>>> f79b5a2b6d26e830693c89570b0007369ef0f555
 
-<<<<<<< HEAD
-	CREATE TABLE Registro_Habitaciones(Habitaciones int UNIQUE NOT NULL, Fecha DATE NOT NULL, Cliente int, No_personas int NOT NULL, FOREIGN KEY(Cliente) REFERENCES Cliente(ID) ON DELETE SET NULL ON UPDATE CASCADE);
-||||||| merged common ancestors
-CREATE TABLE Registro_Habitaciones(Habitaciones int UNIQUE NOT NULL, Fecha DATE NOT NULL, Cliente int, No_personas int NOT NULL, FOREIGN KEY(Cliente) REFERENCES Cliente(ID) ON DELETE SET NULL ON UPDATE CASCADE);
-=======
 CREATE TABLE Registro_Habitaciones(Habitaciones int UNIQUE NOT NULL AUTO_INCREMENT, Fecha DATE NOT NULL, Cliente int, No_personas int NOT NULL, FOREIGN KEY(Cliente) REFERENCES Cliente(ID) ON DELETE SET NULL ON UPDATE CASCADE);
->>>>>>> f79b5a2b6d26e830693c89570b0007369ef0f555
 
-<<<<<<< HEAD
-	CREATE TABLE Reservacion(ID int UNIQUE NOT NULL, Cliente int, Fecha DATE NOT NULL, No_Personas int NOT NULL, Cantidad_Pagada float(6,2) NOT NULL, UltimaModificacion DATE NOT NULL, FOREIGN KEY(Cliente) REFERENCES Cliente(ID) ON DELETE SET NULL ON UPDATE CASCADE);
-||||||| merged common ancestors
-CREATE TABLE Reservacion(ID int UNIQUE NOT NULL, Cliente int, Fecha DATE NOT NULL, No_Personas int NOT NULL, Cantidad_Pagada float(6,2) NOT NULL, UltimaModificacion DATE NOT NULL, FOREIGN KEY(Cliente) REFERENCES Cliente(ID) ON DELETE SET NULL ON UPDATE CASCADE);
-=======
 CREATE TABLE Reservacion(ID int UNIQUE NOT NULL AUTO_INCREMENT, Cliente int, Fecha DATE NOT NULL, No_Personas int NOT NULL, Cantidad_Pagada float(6,2) NOT NULL, UltimaModificacion DATE NOT NULL, FOREIGN KEY(Cliente) REFERENCES Cliente(ID) ON DELETE SET NULL ON UPDATE CASCADE);
->>>>>>> f79b5a2b6d26e830693c89570b0007369ef0f555
 
-<<<<<<< HEAD
-	CREATE TABLE Producto(ID int UNIQUE NOT NULL, Nombre varchar(30) NOT NULL, Precio FLOAT(6,2) NOT NULL, Cantidad int NOT NULL);
-||||||| merged common ancestors
-CREATE TABLE Producto(ID int UNIQUE NOT NULL, Nombre varchar(30) NOT NULL, Precio FLOAT(6,2) NOT NULL, Cantidad int NOT NULL);
-=======
 CREATE TABLE Producto(ID int UNIQUE NOT NULL AUTO_INCREMENT, Nombre varchar(30) NOT NULL, Precio FLOAT(6,2) NOT NULL, Cantidad int NOT NULL);
->>>>>>> f79b5a2b6d26e830693c89570b0007369ef0f555
 
-<<<<<<< HEAD
-	CREATE TABLE Area(ID int UNIQUE NOT NULL, Nombre varchar(30));
-||||||| merged common ancestors
-CREATE TABLE Area(ID int UNIQUE NOT NULL, Nombre varchar(30));
-=======
 CREATE TABLE Area(ID int UNIQUE NOT NULL AUTO_INCREMENT, Nombre varchar(30));
->>>>>>> f79b5a2b6d26e830693c89570b0007369ef0f555
 
-<<<<<<< HEAD
-	CREATE TABLE Inventario(Producto int NOT NULL UNIQUE NOT NULL, Area int UNIQUE NOT NULL, FOREIGN KEY(Area) REFERENCES Area(ID), FOREIGN KEY(Producto) REFERENCES Producto(ID));
-||||||| merged common ancestors
-CREATE TABLE Inventario(Producto int NOT NULL UNIQUE NOT NULL, Area int UNIQUE NOT NULL, FOREIGN KEY(Area) REFERENCES Area(ID), FOREIGN KEY(Producto) REFERENCES Producto(ID));
-=======
 CREATE TABLE Inventario(Producto int NOT NULL UNIQUE NOT NULL, Area int UNIQUE NOT NULL, FOREIGN KEY(Area) REFERENCES Area(ID) ON DELETE NO ACTION ON UPDATE NO ACTION, FOREIGN KEY(Producto) REFERENCES Producto(ID) ON DELETE CASCADE ON UPDATE CASCADE);
->>>>>>> f79b5a2b6d26e830693c89570b0007369ef0f555
 
+CREATE TABLE Hotel(ID int UNIQUE NOT NULL, Nombre varchar(30) NOT NULL);
 
-	CREATE TABLE Hotel(ID int UNIQUE NOT NULL, Nombre varchar(30) NOT NULL);
-
-	CREATE TABLE Usuarios(ID int UNIQUE NOT NULL, Nombre varchar(30) NOT NULL, Administrador TINYINT NOT NULL, Hotel int NOT NULL, Password varchar(35) NOT NULL, FOREIGN KEY(Hotel) REFERENCES Hotel(ID));
+CREATE TABLE Usuarios(ID int UNIQUE NOT NULL, Nombre varchar(30) NOT NULL, Administrador TINYINT NOT NULL, Hotel int NOT NULL, Password varchar(35) NOT NULL, FOREIGN KEY(Hotel) REFERENCES Hotel(ID));
