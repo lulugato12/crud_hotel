@@ -12,11 +12,7 @@
 					<!-- cargar informacion del hotel -->
 					<h1>Bienvenido al Hotel</h1>
 				</div>
-				<div class="col-sm-4">
-					<!-- cargar informacion del usuario -->
-					<h3>Datos del usuario</h3>
-				</div>
-		</div>
+			</div>
 		<!-- cuerpo -->
 		<div class="row">
 			<div class="col-sm-2">
@@ -46,7 +42,7 @@
 				</div>
 				<div class="row">
 					<div class="col-sm-offset-4 col-sm-2">
-						<button type="button" class="btn btn-success btn-md" href="clienteCreate.php">Agregar cliente</button>
+						<a class="btn btn-success" href="clienteCreate.php">Agregar cliente</a>
 					</div>
 				</div>
 				<div class="row">

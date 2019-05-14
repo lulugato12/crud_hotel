@@ -2,33 +2,31 @@
 
 	require 'database.php';
 
-		$f_idError = null;
-		$submError = null;
-		$marcError = null;
-		$acError   = null;
+		$precioError = null;
+		$capError = null;
+    $numError = null;
 		//$perError = null;
 
 	if ( !empty($_POST)) {
 
 		// keep track post values
-		$f_id = $_POST['f_id'];
-		$subm = $_POST['subm'];
-		$marc = $_POST['marc'];
-		$ac   = $_POST['ac'];
+    $num = $_POST['num'];
+		$precio = $_POST['precio'];
+		$cap = $_POST['cap'];
 
 		// validate input
 		$valid = true;
 
-		if (empty($subm)) {
-			$submError = 'Porfavor escribe una submarca';
+    if (empty($num)) {
+      $numError = 'Porfavor escribe el precio';
+      $valid = false;
+    }
+    if (empty($precio)) {
+			$precioError = 'Porfavor escribe el precio';
 			$valid = false;
 		}
-		if (empty($marc)) {
-			$marcError = 'Porfavor escribe un id de marca';
-			$valid = false;
-		}
-		if (empty($ac)) {
-			$acError = 'Porfavor seleccione si el vehículo tiene aire acondicionado';
+		if (empty($cap)) {
+			$capError = 'Porfavor escribe la capacidad';
 			$valid = false;
 		}
 
@@ -37,14 +35,10 @@
 			var_dump($_POST);
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			echo $ac;
-			if($ac=="S")
-				$sql = "INSERT INTO auto2 (idauto,nombrec,idmarca, ac) values(null, ?, ?, true)";
-			else
-				$sql = "INSERT INTO auto2 (idauto,nombrec,idmarca, ac) values(null, ?, ?, false)";
+			$sql = "INSERT INTO Habitacion (ID, Precio,Capacidad) VALUES(?, ?, ?)";
 			$q = $pdo->prepare($sql);
 
-			$q->execute(array($subm,$marc));
+			$q->execute(array($num, $precio,$cap));
 			Database::disconnect();
 			header("Location: index.php");
 		}
@@ -64,52 +58,36 @@
 	    <div class="container">
 	    	<div class="span10 offset1">
 	    		<div class="row">
-		   			<h3>Agregar un auto nuevo</h3>
+		   			<h3>Agregar una habitacion</h3>
 		   		</div>
 
-				<form class="form-horizontal" action="create.php" method="post">
+				<form class="form-horizontal" action="habitacionCreate.php" method="post">
 
-					<div class="control-group <?php echo !empty($submError)?'error':'';?>">
-						<label class="control-label">submarca</label>
+          <div class="control-group <?php echo !empty($numError)?'error':'';?>">
+						<label class="control-label">Num habitacion</label>
 					    <div class="controls">
-					      	<input name="subm" type="text"  placeholder="submarca" value="<?php echo !empty($subm)?$subm:'';?>">
-					      	<?php if (($submError != null)) ?>
-					      		<span class="help-inline"><?php echo $submError;?></span>
+					      	<input name="num" type="text"  placeholder="precio" value="<?php echo !empty($num)?$num:'';?>">
+					      	<?php if (($numError != null)) ?>
+					      		<span class="help-inline"><?php echo $numError;?></span>
 					    </div>
 					</div>
 
-					<div class="control-group <?php echo !empty($marcError)?'error':'';?>">
-				    	<label class="control-label">marca</label>
-				    	<div class="controls">
-	                       	<select name ="marc">
-		                        <option value="">Selecciona una marca</option>
-		                        <?php
-							   		$pdo = Database::connect();
-							   		$query = 'SELECT * FROM marca2';
-			 				   		foreach ($pdo->query($query) as $row) {
-		                        		if ($row['idmarca']==$marc)
-		                        			echo "<option selected value='" . $row['idmarca'] . "'>" . $row['nombrem'] . "</option>";
-		                        		else
-		                        			echo "<option value='" . $row['idmarca'] . "'>" . $row['nombrem'] . "</option>";
-			   						}
-			   						Database::disconnect();
-			  					?>
-                            </select>
-					      	<?php if (($marcError) != null) ?>
-					      		<span class="help-inline"><?php echo $perError;?></span>
-						</div>
+          <div class="control-group <?php echo !empty($precioError)?'error':'';?>">
+						<label class="control-label">Precio</label>
+					    <div class="controls">
+					      	<input name="precio" type="text"  placeholder="precio" value="<?php echo !empty($precio)?$precio:'';?>">
+					      	<?php if (($precioError != null)) ?>
+					      		<span class="help-inline"><?php echo $precioError;?></span>
+					    </div>
 					</div>
 
-					<div class="control-group <?php echo !empty($acError)?'error':'';?>">
-					    <label class="control-label">Aire Acondicionado ?</label>
-						    <div class="controls">
-	                    	    <input name="ac" type="radio" value="S"
-	                               	<?php $ac = null; echo ($ac == "S")?'checked':'';?> >Si</input> &nbsp;&nbsp;
-	                            <input name="ac" type="radio" value="N"
-	                              	<?php $ac=null; echo ($ac == "N")?'checked':'';?> >No</input>
-						       	<?php if (($acError != null)) ?>
-						      		<span class="help-inline"><?php echo $acError;?></span>
-						    </div>
+          <div class="control-group <?php echo !empty($capError)?'error':'';?>">
+						<label class="control-label">Capacidad</label>
+					    <div class="controls">
+					      	<input name="cap" type="text"  placeholder="cap" value="<?php echo !empty($cap)?$cap:'';?>">
+					      	<?php if (($capError != null)) ?>
+					      		<span class="help-inline"><?php echo $capError;?></span>
+					    </div>
 					</div>
 
 					<div class="form-actions">

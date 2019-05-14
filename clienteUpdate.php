@@ -161,7 +161,7 @@
 
 					  <div class="form-actions">
 						  <button type="submit" class="btn btn-success">Actualizar</button>
-						  <a class="btn" href="index.php">Regresar</a>
+						  <a class="btn" href="clientes.php">Regresar</a>
 						</div>
 					</form>
 				</div>
