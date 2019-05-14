@@ -8,24 +8,24 @@
 	}
 
 	if ( null==$id ) {
-		header("Location: clientes.php");
+		header("Location: empleados.php");
 	}
 
 	if ( !empty($_POST)) {
 		// keep track validation errors
 		$f_idError = null;
 		$nombreError = null;
-		$rfcError = null;
-		$correoError = null;
-		$telError = null;
+		$areaError = null;
+		$pagoError = null;
+		$cumpleError = null;
 
 
 		// keep track post values
 		$f_id = $_POST['f_id'];
 		$nombre = $_POST['nombre'];
-		$rfc = $_POST['rfc'];
-		$correo = $_POST['correo'];
-		$tel = $_POST['tel'];
+		$area = $_POST['area'];
+		$pago = $_POST['pago'];
+		$cumple = $_POST['cumple'];
 
 		/// validate input
 		$valid = true;
@@ -35,18 +35,18 @@
 			$valid = false;
 		}
 
-		if (empty($rfc)) {
-			$rfcError = 'Porfavor escribe un rfc';
+		if (empty($area)) {
+			$areaError = 'Porfavor selecciona un area';
 			$valid = false;
 		}
 
-		if (empty($correo)) {
-			$correoError = 'Porfavor escribe un correo';
+		if (empty($pago)) {
+			$pagoError = 'Porfavor escribe una cifra';
 			$valid = false;
 		}
 
-		if (empty($tel)) {
-			$telError = 'Porfavor escribe un telefono';
+		if (empty($cumple)) {
+			$cumpleError = 'Porfavor selecciona una fecha';
 			$valid = false;
 		}
 
@@ -57,29 +57,29 @@
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-			$sql = "UPDATE Cliente set ID = ?, Nombre = ?, Correo =?, RFC=?, Telefono = ? WHERE ID = ?";
+			$sql = "UPDATE Trabajador set ID = ?, Nombre = ?, Area =?, Pago_dia=?, Cumple = ? WHERE ID = ?";
 
 			$q = $pdo->prepare($sql);
 
-			$q->execute(array($f_id,$nombre,$correo,$rfc,$tel,$id));
+			$q->execute(array($f_id,$nombre,$area,$pago,$cumple,$id));
 
 
 			Database::disconnect();
-			header("Location: clientes.php");
+			header("Location: empleados.php");
 		}
 	} else {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "SELECT * FROM Cliente where ID = ?";
+		$sql = "SELECT * FROM Trabajador where ID = ?";
 
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
 		$data = $q->fetch(PDO::FETCH_ASSOC);
 		$f_id = $data['ID'];
 		$nombre = $data['Nombre'];
-		$rfc = $data['RFC'];
-		$correo = $data['Correo'];
-		$tel = $data['Telefono'];
+		$area = $data['Area'];
+		$pago = $data['Pago_dia'];
+		$cumple = $data['Cumple'];
 
 		Database::disconnect();
 	}
@@ -97,10 +97,10 @@
     	<div class="container">
     		<div class="span10 offset1">
     			<div class="row">
-		    		<h3>Actualizar datos de un cliente</h3>
+		    		<h3>Actualizar datos de un empleado</h3>
 		    	</div>
 
-	    			<form class="form-horizontal" action="clienteUpdate.php?id=<?php echo $id?>" method="post">
+	    			<form class="form-horizontal" action="empleadosUpdate.php?id=<?php echo $id?>" method="post">
 
 					  <div class="control-group <?php echo !empty($f_idError)?'error':'';?>">
 
@@ -123,44 +123,60 @@
 					      	<?php endif;?>
 					    </div>
 					  </div>
+					
+					<div class="control-group <?php echo !empty($areaError)?'error':'';?>">
+					    	<label class="control-label">Area</label>
+					    	<div class="controls">
+                            	<select name ="area">
+                                    <option value="">Selecciona una area</option>
+                                        <?php
+					   						$pdo = Database::connect();
+					   						$query = 'SELECT * FROM Area';
+	 				   						foreach ($pdo->query($query) as $row) {
+	 				   							if ($row['ID']==$area)
+                        	   						echo "<option selected value='" . $row['ID'] . "'>" . $row['Nombre'] . "</option>";
+                        	   					else
+                        	   						echo "<option value='" . $row['ID'] . "'>" . $row['Nombre'] . "</option>";
+					   						}
+					   						Database::disconnect();
+					  					?>
+					 </select>
+					      	<?php if (!empty($areaError)): ?>
+					      		<span class="help-inline"><?php echo $areaError;?></span>
+					      	<?php endif;?>
+					    	</div>
+					  	</div>
 
-					 <div class="control-group <?php echo !empty($correo)?'error':'';?>">
 
-					    <label class="control-label">Correo</label>
+
+					 <div class="control-group <?php echo !empty($pago)?'error':'';?>">
+
+					    <label class="control-label">Pago</label>
 					    <div class="controls">
-					      	<input name="correo" type="text" placeholder="correo" value="<?php echo !empty($correo)?$correo:'';?>">
-					      	<?php if (!empty($correoError)): ?>
-					      		<span class="help-inline"><?php echo $correoError;?></span>
+					      	<input name="pago" type="text" placeholder="pago" value="<?php echo !empty($pago)?$pago:'';?>">
+					      	<?php if (!empty($pagoError)): ?>
+					      		<span class="help-inline"><?php echo $pagoError;?></span>
 					      	<?php endif;?>
 					    </div>
 					  </div>
 
-					 <div class="control-group <?php echo !empty($rfc)?'error':'';?>">
+					 <div class="control-group <?php echo !empty($cumple)?'error':'';?>">
 
-					    <label class="control-label">RFC</label>
+					    <label class="control-label">Cumpleaños</label>
 					    <div class="controls">
-					      	<input name="rfc" type="text" placeholder="rfc" value="<?php echo !empty($rfc)?$rfc:'';?>">
-					      	<?php if (!empty($rfcError)): ?>
-					      		<span class="help-inline"><?php echo $rfcError;?></span>
+					      	<input name="cumple" type="text" placeholder="cumple" value="<?php echo !empty($cumple)?$cumple:'';?>">
+					      	<?php if (!empty($cumpleError)): ?>
+					      		<span class="help-inline"><?php echo $cumpleError;?></span>
 					      	<?php endif;?>
 					    </div>
 					  </div>
 
-					 <div class="control-group <?php echo !empty($tel)?'error':'';?>">
-
-					    <label class="control-label">Telefono</label>
-					    <div class="controls">
-					      	<input name="tel" type="text" placeholder="tel" value="<?php echo !empty($tel)?$tel:'';?>">
-					      	<?php if (!empty($telError)): ?>
-					      		<span class="help-inline"><?php echo $telError;?></span>
-					      	<?php endif;?>
-					    </div>
-					  </div>
+					
 
 
 					  <div class="form-actions">
 						  <button type="submit" class="btn btn-success">Actualizar</button>
-						  <a class="btn" href="index.php">Regresar</a>
+						  <a class="btn" href="empleados.php">Regresar</a>
 						</div>
 					</form>
 				</div>
