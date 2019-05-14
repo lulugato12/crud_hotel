@@ -37,35 +37,110 @@
 			<div class="col-sm-9">
 				<!-- mostrar informacion del hotel -->
 				<h3 class="text-center">Inventarios</h3>
-
-			</div>
-
-
-
-
-
-
-        <!-- vista previa inventarios -->
-				<?php
-						/*include 'database.php';
+				
+				<h4 class="text-center">Lavanderia</h4>
+				<table class="table">
+				<thead>
+ 						<tr>
+			                	<th>Producto	</th>
+						<th>Cantidad	</th>
+						<th>Opciones				</th>
+			                </tr>
+				</thead>
+				<tbody>
+					<?php
+						include 'database.php';
 						   	$pdo = Database::connect();
-						   	$sql = 'SELECT * FROM auto2 natural join marca2 ORDER BY idauto';
+						   	$sql = 'SELECT Producto.ID as ID,Producto.Nombre as Nombre, Producto.Cantidad FROM Inventario join Producto ON Inventario.Producto=Producto.ID WHERE Inventario.Area=1';
 		 				   	foreach ($pdo->query($sql) as $row) {
 								echo '<tr>';
-	    					   	echo '<td>'. $row['nombrec'] . '</td>';
-	    					  	echo '<td>'. $row['nombrem'] . '</td>';
-	                            echo '<td>';    echo ($row['ac'])?"SI":"NO"; echo'</td>';
-	                            echo '<td width=250>';
-	    					   	echo '<a class="btn" href="read.php?id='.$row['idauto'].'">Detalles</a>';
+	    					   	echo '<td>'. $row['Nombre'] . '</td>';
+							echo '<td>'. $row['Cantidad'] . '</td>';
+	    					  	//echo '<td>';  echo ($row['RFC'])?$row['RFC']:"NO"; echo'</td>';
+										echo '<td width=250>';
+	    					   	
+							echo '<a class="btn btn-sm" href="clienteRead.php?id='.$row['ID'].'">Detalles</a>';
 	    					   	echo '&nbsp;';
-	    					  	echo '<a class="btn btn-success" href="update.php?id='.$row['idauto'].'">Actualizar</a>';
+	    					  	echo '<a class="btn btn-success btn-sm" href="inventariosUpdate.php?id='.$row['ID'].'">Actualizar</a>';
 	    					   	echo '&nbsp;';
-	    					   	echo '<a class="btn btn-danger" href="delete.php?id='.$row['idauto'].'">Eliminar</a>';
+	    					   	echo '<a class="btn btn-danger btn-sm" href="inventariosDelete.php?id='.$row['ID'].'">Eliminar</a>';
 	    					   	echo '</td>';
 							  	echo '</tr>';
 						    }
-						   	Database::disconnect();*/
+						   	Database::disconnect();
 				?>
+				</tbody>
+			</table>
+
+			<h4 class="text-center">Restaurante</h4>
+				<table class="table">
+				<thead>
+ 						<tr>
+			                	<th>Producto	</th>
+						<th>Cantidad	</th>
+						<th>Opciones				</th>
+			                </tr>
+				</thead>
+				<tbody>
+					<?php
+						//include 'database.php';
+						   	$pdo = Database::connect();
+						   	$sql = 'SELECT Producto.ID as ID,Producto.Nombre as Nombre, Producto.Cantidad FROM Inventario join Producto ON Inventario.Producto=Producto.ID WHERE Inventario.Area=2';
+		 				   	foreach ($pdo->query($sql) as $row) {
+								echo '<tr>';
+	    					   	echo '<td>'. $row['Nombre'] . '</td>';
+							echo '<td>'. $row['Cantidad'] . '</td>';
+	    					  	//echo '<td>';  echo ($row['RFC'])?$row['RFC']:"NO"; echo'</td>';
+										echo '<td width=250>';
+	    					   	
+							echo '<a class="btn btn-sm" href="clienteRead.php?id='.$row['ID'].'">Detalles</a>';
+	    					   	echo '&nbsp;';
+	    					  	echo '<a class="btn btn-success btn-sm" href="inventariosUpdate.php?id='.$row['ID'].'">Actualizar</a>';
+	    					   	echo '&nbsp;';
+	    					   	echo '<a class="btn btn-danger btn-sm" href="inventariosDelete.php?id='.$row['ID'].'">Eliminar</a>';
+	    					   	echo '</td>';
+							  	echo '</tr>';
+						    }
+						   	Database::disconnect();
+				?>
+				</tbody>
+			</table>
+
+			<h4 class="text-center">Hotel</h4>
+				<table class="table">
+				<thead>
+ 						<tr>
+			                	<th>Producto	</th>
+						<th>Cantidad	</th>
+						<th>Opciones				</th>
+			                </tr>
+				</thead>
+				<tbody>
+					<?php
+						//include 'database.php';
+						   	$pdo = Database::connect();
+						   	$sql = 'SELECT Producto.ID as ID,Producto.Nombre as Nombre, Producto.Cantidad FROM Inventario join Producto ON Inventario.Producto=Producto.ID WHERE Inventario.Area=3';
+		 				   	foreach ($pdo->query($sql) as $row) {
+								echo '<tr>';
+	    					   	echo '<td>'. $row['Nombre'] . '</td>';
+							echo '<td>'. $row['Cantidad'] . '</td>';
+	    					  	//echo '<td>';  echo ($row['RFC'])?$row['RFC']:"NO"; echo'</td>';
+										echo '<td width=250>';
+	    					   	
+							echo '<a class="btn btn-sm" href="clienteRead.php?id='.$row['ID'].'">Detalles</a>';
+	    					   	echo '&nbsp;';
+	    					  	echo '<a class="btn btn-success btn-sm" href="inventariosUpdate.php?id='.$row['ID'].'">Actualizar</a>';
+	    					   	echo '&nbsp;';
+	    					   	echo '<a class="btn btn-danger btn-sm" href="inventariosDelete.php?id='.$row['ID'].'">Eliminar</a>';
+	    					   	echo '</td>';
+							  	echo '</tr>';
+						    }
+						   	Database::disconnect();
+				?>
+				</tbody>
+			</table>
+			</div>
+
 			</div>
 			<!-- pie de pagina -->
 			<div class="row">
