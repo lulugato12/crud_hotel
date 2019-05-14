@@ -21,7 +21,8 @@
 <html lang="en">
 	<head>
 	    <meta 	charset="utf-8">
-	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+			<link   href=	"css/bootstrap.min.css" rel="stylesheet">
+	    <script src=	"js/bootstrap.min.js"></script>
 	</head>
 
 	<body>
@@ -47,7 +48,7 @@
 					    <label class="control-label">RFC</label>
 					    <div class="controls">
 					      	<label class="checkbox">
-						     	<?php echo $data['RFC']?$data['RFC']: 'No tiene';?>
+						     	<?php echo $data['RFC']?$data['RFC']: 'NO';?>
 						    </label>
 					    </div>
 					</div>
@@ -56,7 +57,7 @@
 					    <label class="control-label">Correo</label>
 					    <div class="controls">
 					      	<label class="checkbox">
-						     	<?php echo $data['Correo']?$data['Correo']:'No tiene';?>
+						     	<?php echo $data['Correo']?$data['Correo']:'NO';?>
 						    </label>
 					    </div>
 					</div>
@@ -66,7 +67,7 @@
 					    <label class="control-label">Telefono</label>
 					    <div class="controls">
 					      	<label class="checkbox">
-						     	<?php echo $data['Telefono']?$data['Telefono']:'No tiene';?>
+						     	<?php echo $data['Telefono']?$data['Telefono']:'NO';?>
 						    </label>
 					    </div>
 					</div>
