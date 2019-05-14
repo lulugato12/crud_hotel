@@ -39,25 +39,48 @@
 				<!-- mostrar informacion del hotel -->
 				<h3 class="text-center">Lista de clientes</h3>
 			</div>
+			<table class="table">
+				<thead>
+					<tr>
+						Nombre
+					</tr>
+					<tr>
+						RFC
+					</tr>
+					<tr>
+						Correo
+					</tr>
+					<tr>
+						Telefono
+					</tr>
+					<tr>
+						Opciones
+					</tr>
+				</thead>
+				<tbody>
+
+				</tbody>
+			</table>
 				<?php
-						/*include 'database.php';
+						include 'database.php';
 						   	$pdo = Database::connect();
-						   	$sql = 'SELECT * FROM auto2 natural join marca2 ORDER BY idauto';
+						   	$sql = 'SELECT * FROM Cliente';
 		 				   	foreach ($pdo->query($sql) as $row) {
 								echo '<tr>';
-	    					   	echo '<td>'. $row['nombrec'] . '</td>';
-	    					  	echo '<td>'. $row['nombrem'] . '</td>';
-	                            echo '<td>';    echo ($row['ac'])?"SI":"NO"; echo'</td>';
-	                            echo '<td width=250>';
-	    					   	echo '<a class="btn" href="read.php?id='.$row['idauto'].'">Detalles</a>';
+	    					   	echo '<td>'. $row['Nombre'] . '</td>';
+	    					  	echo ($row['RFC'])?$row['RFC']:"NO"; echo'</td>';
+										echo ($row['Correo'])?$row['Correo']:"NO"; echo'</td>';
+										echo ($row['Telefono'])?$row['Telefono']:"NO"; echo'</td>';
+										echo '<td width=250>';
+	    					   	echo '<a class="btn" href="read.php?id='.$row['ID'].'">Detalles</a>';
 	    					   	echo '&nbsp;';
-	    					  	echo '<a class="btn btn-success" href="update.php?id='.$row['idauto'].'">Actualizar</a>';
+	    					  	echo '<a class="btn btn-success" href="update.php?id='.$row['ID'].'">Actualizar</a>';
 	    					   	echo '&nbsp;';
-	    					   	echo '<a class="btn btn-danger" href="delete.php?id='.$row['idauto'].'">Eliminar</a>';
+	    					   	echo '<a class="btn btn-danger" href="delete.php?id='.$row['ID'].'">Eliminar</a>';
 	    					   	echo '</td>';
 							  	echo '</tr>';
 						    }
-						   	Database::disconnect();*/
+						   	Database::disconnect();
 				?>
 			</div>
 			<!-- pie de pagina -->
