@@ -23,7 +23,7 @@
 				<!-- mostrar opciones -->
 				<h3 class="text-center">Menu</h3>
 				<div class="row">
-					     <a href="dashboard.php"><p class="text-center">Inicio</p></a>
+					     <a href="index.php"><p class="text-center">Inicio</p></a>
 				</div>
 				<div class="row">
           <a href="reservacion.php"><p class="text-center">Reservacion</p></a>
@@ -44,17 +44,24 @@
 
 			<div class="col-sm-9">
 				<!-- mostrar informacion del hotel -->
-				<h3 class="text-center">Lista de clientes</h3>
-
-			<table class="table">
-				<thead>
- 						<tr>
+				<div class="row">
+					<h3 class="text-center">Lista de clientes</h3>
+				</div>
+				<div class="row">
+					<div class="col-sm-offset-4 col-sm-2">
+						<button type="button" class="btn btn-success btn-md">Agregar cliente</button>
+					</div>
+				</div>
+				<div class="row">
+					<table class="table">
+						<thead>
+ 							<tr>
 			                	<th>Nombre	</th>
 			                	<th>RFC			</th>
 						<th>Opciones				</th>
 			                </tr>
-				</thead>
-				<tbody>
+						</thead>
+						<tbody>
 					<?php
 						include 'database.php';
 						   	$pdo = Database::connect();
@@ -64,7 +71,7 @@
 	    					   	echo '<td>'. $row['Nombre'] . '</td>';
 	    					  	echo '<td>';  echo ($row['RFC'])?$row['RFC']:"NO"; echo'</td>';
 										echo '<td width=250>';
-	    					   	echo '<a class="btn btn-sm" href="clienteRead.php?id='.$row['ID'].'">Detalles</a>';
+	    					   	echo '<a class="btn btn-info" href="clienteRead.php?id='.$row['ID'].'">Detalles</a>';
 	    					   	echo '&nbsp;';
 	    					  	echo '<a class="btn btn-success btn-sm" href="clienteUpdate.php?id='.$row['ID'].'">Actualizar</a>';
 	    					   	echo '&nbsp;';
@@ -73,9 +80,9 @@
 							  	echo '</tr>';
 						    }
 						   	Database::disconnect();
-				?>
-				</tbody>
-			</table>
+								?>
+						</tbody>
+					</table>
 				</div>
 			</div>
 			<!-- pie de pagina -->

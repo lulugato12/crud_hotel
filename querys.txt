@@ -1,4 +1,4 @@
-CREATE TABLE Habitacion(ID int UNIQUE NOT NULL, Limpio tinyint NOT NULL, Disponible tinyint NOT NULL, Precio FLOAT(6,2) NOT NULL, Capacidad int NOT NULL);
+CREATE TABLE Habitacion(ID int UNIQUE NOT NULL, Precio FLOAT(6,2) NOT NULL, Capacidad int NOT NULL);
 
 CREATE TABLE Tipo_factura(ID int UNIQUE NOT NULL, Nombre varchar(30) NOT NULL);
 
