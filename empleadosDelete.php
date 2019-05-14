@@ -23,7 +23,8 @@
 <html lang="en">
 	<head>
 	    <meta 	charset="utf-8">
-	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+			<link   href=	"css/bootstrap.min.css" rel="stylesheet">
+	    <script src=	"js/bootstrap.min.js"></script>
 	</head>
 
 	<body>

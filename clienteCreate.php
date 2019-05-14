@@ -1,52 +1,46 @@
-<?php 
-	
+<?php
+
 	require 'database.php';
 
-		$f_idError = null;
-		$submError = null;
-		$marcError = null;
-		$acError   = null;
+		$nombreError = null;
 		//$perError = null;
 
 	if ( !empty($_POST)) {
-		
-		// keep track post values		
-		$f_id = $_POST['f_id'];
-		$subm = $_POST['subm'];
-		$marc = $_POST['marc'];
-		$ac   = $_POST['ac'];
-		
+
+		// keep track post values
+		$nombre = $_POST['nombre'];
+		$rfc = $_POST['rfc'];
+		$correo = $_POST['correo'];
+		$tel = $_POST['tel'];
+
 		// validate input
 		$valid = true;
-		
-		if (empty($subm)) {
-			$submError = 'Porfavor escribe una submarca';
+
+		if (empty($nombre)) {
+			$nombreError = 'Porfavor escribe un nombre';
 			$valid = false;
 		}
-		if (empty($marc)) {
-			$marcError = 'Porfavor escribe un id de marca';
-			$valid = false;
+		if (empty($rfc)) {
+			$rfc = 'null';
 		}
-		if (empty($ac)) {
-			$acError = 'Porfavor seleccione si el vehículo tiene aire acondicionado';
-			$valid = false;
-		}				
-		
+		if (empty($correo)) {
+			$correo = 'null';
+		}
+		if (empty($tel)) {
+			$tel = 'null';
+		}
+
 		// insert data
 		if ($valid) {
 			var_dump($_POST);
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			echo $ac;
-			if($ac=="S")
-				$sql = "INSERT INTO auto2 (idauto,nombrec,idmarca, ac) values(null, ?, ?, true)";			
-			else
-				$sql = "INSERT INTO auto2 (idauto,nombrec,idmarca, ac) values(null, ?, ?, false)";			
+			$sql = "INSERT INTO Cliente (ID, Nombre, Correo, RFC, Telefono) values(null, ?, ?, ?, ?)";
 			$q = $pdo->prepare($sql);
-			
-			$q->execute(array($subm,$marc));			
+
+			$q->execute(array($nombre, $correo, $rfc, $telefono));
 			Database::disconnect();
-			header("Location: index.php");
+			header("Location: clientes.php");
 		}
 	}
 ?>
@@ -64,52 +58,39 @@
 	    <div class="container">
 	    	<div class="span10 offset1">
 	    		<div class="row">
-		   			<h3>Agregar un auto nuevo</h3>
+		   			<h3>Agregar un cliente nuevo</h3>
 		   		</div>
-	    		
-				<form class="form-horizontal" action="create.php" method="post">
-				
-					<div class="control-group <?php echo !empty($submError)?'error':'';?>">
-						<label class="control-label">submarca</label>
+
+				<form class="form-horizontal" action="clienteCreate.php" method="post">
+
+					<div class="control-group <?php echo !empty($nombreError)?'error':'';?>">
+						<label class="control-label">Nombre</label>
 					    <div class="controls">
-					      	<input name="subm" type="text"  placeholder="submarca" value="<?php echo !empty($subm)?$subm:'';?>">
-					      	<?php if (($submError != null)) ?>
-					      		<span class="help-inline"><?php echo $submError;?></span>						      	
+					      	<input name="nombre" type="text"  placeholder="nombre" value="<?php echo !empty(nombre)?nombre:'';?>">
+					      	<?php if (($nombreError != null)) ?>
+					      		<span class="help-inline"><?php echo $nombreError;?></span>
 					    </div>
 					</div>
 
-					<div class="control-group <?php echo !empty($marcError)?'error':'';?>">
-				    	<label class="control-label">marca</label>
-				    	<div class="controls">
-	                       	<select name ="marc">
-		                        <option value="">Selecciona una marca</option>
-		                        <?php
-							   		$pdo = Database::connect();
-							   		$query = 'SELECT * FROM marca2';
-			 				   		foreach ($pdo->query($query) as $row) {
-		                        		if ($row['idmarca']==$marc)
-		                        			echo "<option selected value='" . $row['idmarca'] . "'>" . $row['nombrem'] . "</option>";
-		                        		else
-		                        			echo "<option value='" . $row['idmarca'] . "'>" . $row['nombrem'] . "</option>";
-			   						}
-			   						Database::disconnect();
-			  					?>
-                            </select>
-					      	<?php if (($marcError) != null) ?>
-					      		<span class="help-inline"><?php echo $perError;?></span>
-						</div>
+					<div class="control-group">
+						<label class="control-label">RFC</label>
+					    <div class="controls">
+					      	<input name="rfc" type="text"  placeholder="rfc">
+					    </div>
 					</div>
 
-					<div class="control-group <?php echo !empty($acError)?'error':'';?>">
-					    <label class="control-label">Aire Acondicionado ?</label>
-						    <div class="controls">
-	                    	    <input name="ac" type="radio" value="S"
-	                               	<?php $ac = null; echo ($ac == "S")?'checked':'';?> >Si</input> &nbsp;&nbsp;
-	                            <input name="ac" type="radio" value="N" 
-	                              	<?php $ac=null; echo ($ac == "N")?'checked':'';?> >No</input>
-						       	<?php if (($acError != null)) ?>
-						      		<span class="help-inline"><?php echo $acError;?></span>						      	
-						    </div>
+					<div class="control-group">
+						<label class="control-label">Correo</label>
+					    <div class="controls">
+					      	<input name="correo" type="email"  placeholder="correo">
+					    </div>
+					</div>
+
+					<div class="control-group">
+						<label class="control-label">Telefono</label>
+					    <div class="controls">
+					      	<input name="tel" type="text"  placeholder="tel">
+					    </div>
 					</div>
 
 					<div class="form-actions">
@@ -118,7 +99,7 @@
 					</div>
 
 				</form>
-			</div>					
+			</div>
 	    </div> <!-- /container -->
 	</body>
 </html>

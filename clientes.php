@@ -46,7 +46,7 @@
 				</div>
 				<div class="row">
 					<div class="col-sm-offset-4 col-sm-2">
-						<button type="button" class="btn btn-success btn-md">Agregar cliente</button>
+						<button type="button" class="btn btn-success btn-md" href="clienteCreate.php">Agregar cliente</button>
 					</div>
 				</div>
 				<div class="row">
