@@ -8,7 +8,7 @@
 	}
 	
 	if ( null==$id ) {
-		header("Location: index.php");
+		header("Location: clientes.php");
 	}
 	
 	if ( !empty($_POST)) {
@@ -22,53 +22,65 @@
 		
 		// keep track post values
 		$f_id = $_POST['f_id'];
-		$subm = $_POST['subm'];
-		$marc = $_POST['marc'];
-		$ac = $_POST['ac'];
+		$nombre = $_POST['nombre'];
+		$rfc = $_POST['rfc'];
+		$correo = $_POST['correo'];
+		$tel = $_POST['tel'];
 		
 		/// validate input
 		$valid = true;
 		
-		if (empty($subm)) {
-			$submError = 'Porfavor escribe una submarca';
+		if (empty($nombre)) {
+			$nombreError = 'Porfavor escribe un nombre';
 			$valid = false;
 		}
 
-		if (empty($marc)) {
-			$marcError = 'Porfavor escribe un id de marca';
+		if (empty($rfc)) {
+			$rfcError = 'Porfavor escribe un rfc';
 			$valid = false;
 		}		
 		
+		if (empty($correo)) {
+			$correoError = 'Porfavor escribe un correo';
+			$valid = false;
+		}
+		
+		if (empty($tel)) {
+			$telError = 'Porfavor escribe un telefono';
+			$valid = false;
+		}
+
+
 		// update data
 		if ($valid) {
 
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			if ($ac=="S")
-				$sql = "UPDATE auto2  set idauto = ?, nombrec = ?, idmarca =?, ac= true WHERE idauto = ?";
-			else 
-				$sql = "UPDATE auto2  set idauto = ?, nombrec = ?, idmarca =?, ac= false WHERE idauto = ?";
+			
+			$sql = "UPDATE Cliente set ID = ?, Nombre = ?, Correo =?, RFC=?, Telefono = ? WHERE ID = ?";
 			
 			$q = $pdo->prepare($sql);
 
-			$q->execute(array($f_id,$subm,$marc,$id));
+			$q->execute(array($f_id,$nombre,$correo,$rfc,$tel,$id));
 
 			
 			Database::disconnect();			
-			header("Location: index.php");
+			header("Location: clientes.php");
 		}
 	} else {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "SELECT * FROM auto2 where idauto = ?";
+		$sql = "SELECT * FROM Cliente where ID = ?";
 
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
 		$data = $q->fetch(PDO::FETCH_ASSOC);
-		$f_id = $data['idauto'];
-		$subm = $data['nombrec'];
-		$marc = $data['idmarca'];
-		$ac   = ($data['ac'])?"S":"N";
+		$f_id = $data['ID'];
+		$nombre = $data['Nombre'];
+		$rfc = $data['RFC'];
+		$correo = $data['Correo'];
+		$tel = $data['Telefono'];
+
 		Database::disconnect();
 	}
 ?>
@@ -86,14 +98,14 @@
     	<div class="container">
     		<div class="span10 offset1">
     			<div class="row">
-		    		<h3>Actualizar datos de un auto</h3>
+		    		<h3>Actualizar datos de un cliente</h3>
 		    	</div>
     		
-	    			<form class="form-horizontal" action="update.php?id=<?php echo $id?>" method="post">
+	    			<form class="form-horizontal" action="clienteUpdate.php?id=<?php echo $id?>" method="post">
 					  
 					  <div class="control-group <?php echo !empty($f_idError)?'error':'';?>">
 
-					    <label class="control-label">id</label>
+					    <label class="control-label">ID</label>
 					    <div class="controls">
 					      	<input name="f_id" type="text" readonly placeholder="id" value="<?php echo !empty($id)?$id:''; ?>">
 					      	<?php if (!empty($f_idError)): ?>
@@ -102,55 +114,49 @@
 					    </div>
 					  </div>
 					  
-					  <div class="control-group <?php echo !empty($submError)?'error':'';?>">
+					  <div class="control-group <?php echo !empty($nombre)?'error':'';?>">
 					  
-					    <label class="control-label">submarca</label>
+					    <label class="control-label">Nombre</label>
 					    <div class="controls">
-					      	<input name="subm" type="text" placeholder="submarca" value="<?php echo !empty($subm)?$subm:'';?>">
-					      	<?php if (!empty($submError)): ?>
-					      		<span class="help-inline"><?php echo $submError;?></span>
+					      	<input name="nombre" type="text" placeholder="nombre" value="<?php echo !empty($nombre)?$nombre:'';?>">
+					      	<?php if (!empty($nombreError)): ?>
+					      		<span class="help-inline"><?php echo $nombreError;?></span>
 					      	<?php endif;?>
 					    </div>
 					  </div>
 
-						<div class="control-group <?php echo !empty($marcError)?'error':'';?>">
-					    	<label class="control-label">marca</label>
-					    	<div class="controls">
-                            	<select name ="marc">
-                                    <option value="">Selecciona una marca</option>
-                                        <?php
-					   						$pdo = Database::connect();
-					   						$query = 'SELECT * FROM marca2';
-	 				   						foreach ($pdo->query($query) as $row) {
-	 				   							if ($row['idmarca']==$marc)
-                        	   						echo "<option selected value='" . $row['idmarca'] . "'>" . $row['nombrem'] . "</option>";
-                        	   					else
-                        	   						echo "<option value='" . $row['idmarca'] . "'>" . $row['nombrem'] . "</option>";
-					   						}
-					   						Database::disconnect();
-					  					?>
-                                                    
-                                </select>
-					      	<?php if (!empty($marcError)): ?>
-					      		<span class="help-inline"><?php echo $marcError;?></span>
+					 <div class="control-group <?php echo !empty($correo)?'error':'';?>">
+					  
+					    <label class="control-label">Correo</label>
+					    <div class="controls">
+					      	<input name="correo" type="text" placeholder="correo" value="<?php echo !empty($correo)?$correo:'';?>">
+					      	<?php if (!empty($correoError)): ?>
+					      		<span class="help-inline"><?php echo $correoError;?></span>
 					      	<?php endif;?>
-					    	</div>
-					  	</div>
+					    </div>
+					  </div>
 
-					  	<div class="control-group <?php echo !empty($acError)?'error':'';?>">
-						    <label class="control-label">Aire Acondicionado ?</label>
-						    <div class="controls">
-	                                                <input name="ac" type="radio" value="S"
-	                                                	<?php echo ($ac == "S")?'checked':'';?> >Si</input> &nbsp;&nbsp;
-	                                                <input name="ac" type="radio" value="N" 
-	                                                	<?php echo ($ac == "N")?'checked':'';?> >No</input>
-						      	
-						      	<?php if (!empty($acError)): ?>
-						      		<span class="help-inline"><?php echo $acError;?></span>
-						      	<?php endif;?>
-						    </div>
-					  	</div>
+					 <div class="control-group <?php echo !empty($rfc)?'error':'';?>">
+					  
+					    <label class="control-label">RFC</label>
+					    <div class="controls">
+					      	<input name="rfc" type="text" placeholder="rfc" value="<?php echo !empty($rfc)?$rfc:'';?>">
+					      	<?php if (!empty($rfcError)): ?>
+					      		<span class="help-inline"><?php echo $rfcError;?></span>
+					      	<?php endif;?>
+					    </div>
+					  </div>
 
+					 <div class="control-group <?php echo !empty($tel)?'error':'';?>">
+					  
+					    <label class="control-label">Telefono</label>
+					    <div class="controls">
+					      	<input name="tel" type="text" placeholder="tel" value="<?php echo !empty($tel)?$tel:'';?>">
+					      	<?php if (!empty($telError)): ?>
+					      		<span class="help-inline"><?php echo $telError;?></span>
+					      	<?php endif;?>
+					    </div>
+					  </div>
 
 
 					  <div class="form-actions">

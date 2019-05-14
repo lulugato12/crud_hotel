@@ -5,7 +5,7 @@
 		$id = $_REQUEST['id'];
 	}	
 	if ( $id==null) {
-		header("Location: index.php");
+		header("Location: clientes.php");
 	} else {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
