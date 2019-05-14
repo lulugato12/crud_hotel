@@ -35,21 +35,23 @@
           <a href="inventarios.php"><p class="text-center">Inventarios</p></a>
 				</div>
 			</div>
-			<div class="col-sm-9">
+			<div class="col-sm-6">
 				<!-- mostrar informacion del hotel -->
-				<h3 class="text-center">Dashboard</h3>
+				<h3 class="text-center">Habitaciones</h3>
 			</div>
 				<?php
-					include 'database.php';
+					/*include 'database.php';
 					$pdo = Database::connect();
 					$sql = 'SELECT * FROM cliente';
 		 			foreach ($pdo->query($sql) as $row) {
-	    			echo $row['nombre'] . ' ';
-						echo $row['apellido']. '<br>';
+
 					}
-					Database::disconnect();
+					Database::disconnect();*/
 				?>
+			<div class="col-sm-3">
+				<h3 class="text-center">Facturas</h3>
 			</div>
+		</div>
 			<!-- pie de pagina -->
 			<div class="row">
 				<div class="col-sm-12">
