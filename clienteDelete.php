@@ -11,11 +11,11 @@
 		// delete data
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "DELETE FROM auto2 WHERE idauto = ?";
+		$sql = "DELETE FROM Cliente WHERE ID = ?";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));		
 		Database::disconnect();
-		header("Location: index.php");		
+		header("Location: clientes.php");		
 	} 	
 ?>
 
@@ -31,15 +31,15 @@
 	    <div class="container">	    
 	    	<div class="span10 offset1">
 	    		<div class="row">
-			    	<h3>Eliminar un auto</h3>
+			    	<h3>Eliminar un cliente</h3>
 			    </div>
 			    
-			    <form class="form-horizontal" action="delete.php" method="post">
+			    <form class="form-horizontal" action="clienteDelete.php" method="post">
 		    		<input type="hidden" name="id" value="<?php echo $id;?>"/>
-					<p class="alert alert-error">Estas seguro que quieres eliminar este auto ?</p>
+					<p class="alert alert-error">Estas seguro que quieres eliminar este cliente ?</p>
 					<div class="form-actions">
 						<button type="submit" class="btn btn-danger">Si</button>
-						<a class="btn" href="index.php">No</a>
+						<a class="btn" href="clientes.php">No</a>
 					</div>
 				</form>
 			</div>					

@@ -14,8 +14,11 @@
 	if ( !empty($_POST)) {
 		// keep track validation errors
 		$f_idError = null;
-		$submError = null;
-		$marcError = null;
+		$nombreError = null;
+		$rfcError = null;
+		$correoError = null;
+		$telError = null;
+		
 		
 		// keep track post values
 		$f_id = $_POST['f_id'];

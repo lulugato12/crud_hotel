@@ -35,12 +35,15 @@
           <a href="inventarios.php"><p class="text-center">Inventarios</p></a>
 				</div>
 			</div>
+			
 			<div class="col-sm-9">
 				<!-- mostrar informacion del hotel -->
 				<h3 class="text-center">Lista de clientes</h3>
-			</div>
+			
 			<table class="table">
 				<thead>
+
+					<!--
 					<tr>
 						Nombre
 					</tr>
@@ -55,33 +58,36 @@
 					</tr>
 					<tr>
 						Opciones
-					</tr>
+					</tr>-->
+ 						<tr>		                 
+			                	<th>Nombre	</th>
+			                	<th>RFC			</th>
+						<th>Opciones				</th>                          		                  
+			                </tr>
 				</thead>
 				<tbody>
-
-				</tbody>
-			</table>
-				<?php
+					<?php
 						include 'database.php';
 						   	$pdo = Database::connect();
 						   	$sql = 'SELECT * FROM Cliente';
 		 				   	foreach ($pdo->query($sql) as $row) {
 								echo '<tr>';
 	    					   	echo '<td>'. $row['Nombre'] . '</td>';
-	    					  	echo ($row['RFC'])?$row['RFC']:"NO"; echo'</td>';
-										echo ($row['Correo'])?$row['Correo']:"NO"; echo'</td>';
-										echo ($row['Telefono'])?$row['Telefono']:"NO"; echo'</td>';
+	    					  	echo '<td>';  echo ($row['RFC'])?$row['RFC']:"NO"; echo'</td>';
 										echo '<td width=250>';
-	    					   	echo '<a class="btn" href="read.php?id='.$row['ID'].'">Detalles</a>';
+	    					   	echo '<a class="btn btn-sm" href="clienteRead.php?id='.$row['ID'].'">Detalles</a>';
 	    					   	echo '&nbsp;';
-	    					  	echo '<a class="btn btn-success" href="update.php?id='.$row['ID'].'">Actualizar</a>';
+	    					  	echo '<a class="btn btn-success btn-sm" href="clienteUpdate.php?id='.$row['ID'].'">Actualizar</a>';
 	    					   	echo '&nbsp;';
-	    					   	echo '<a class="btn btn-danger" href="delete.php?id='.$row['ID'].'">Eliminar</a>';
+	    					   	echo '<a class="btn btn-danger btn-sm" href="clienteDelete.php?id='.$row['ID'].'">Eliminar</a>';
 	    					   	echo '</td>';
 							  	echo '</tr>';
 						    }
 						   	Database::disconnect();
 				?>
+				</tbody>
+			</table>
+				</div>   
 			</div>
 			<!-- pie de pagina -->
 			<div class="row">

@@ -9,7 +9,7 @@
 	} else {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "SELECT * FROM auto2 natural join marca2 where idauto = ?";
+		$sql = "SELECT * FROM Cliente";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
 		$data = $q->fetch(PDO::FETCH_ASSOC);
@@ -18,7 +18,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">	
 	<head>
 	    <meta 	charset="utf-8">
 	    <link   href=	"css/bootstrap.min.css" rel="stylesheet">
@@ -30,7 +30,7 @@
     	
     		<div class="span10 offset1">
     			<div class="row">
-		    		<h3>Detalles de un auto</h3>
+		    		<h3>Detalles del Cliente</h3>
 		    	</div>
 		    
 	    		<div class="form-horizontal" >
@@ -39,29 +39,40 @@
 						<label class="control-label">id</label>
 					    <div class="controls">
 							<label class="checkbox">
-								<?php echo $data['idauto'];?>
+								<?php echo $data['ID'];?>
 							</label>
 					    </div>
 					</div>
 
 					<div class="control-group">
-					    <label class="control-label">submarca</label>
+					    <label class="control-label">RFC</label>
 					    <div class="controls">
 					      	<label class="checkbox">
-						     	<?php echo $data['nombrec'];?>
+						     	<?php echo $data['RFC'];?>
 						    </label>
 					    </div>
 					</div>
 					
 					<div class="control-group">
-					    <label class="control-label">marca</label>
+					    <label class="control-label">Correo</label>
 					    <div class="controls">
 					      	<label class="checkbox">
-						     	<?php echo $data['nombrem'];?>
+						     	<?php echo $data['Correo'];?>
 						    </label>
-					    </div>
+					    </div>	 
 					</div>
 
+
+					<div class="control-group">
+					    <label class="control-label">Telefono</label>
+					    <div class="controls">
+					      	<label class="checkbox">
+						     	<?php echo $data['Telefono'];?>
+						    </label>
+					    </div>	 
+					</div>
+					
+<!--
 					<div class="control-group">
 						<label class="control-label">aire acondicionado</label>
 					    <div class="controls">
@@ -70,9 +81,10 @@
 						    </label>
 					    </div>
 					</div>
+					--> 	
 
 				    <div class="form-actions">
-						<a class="btn" href="index.php">Regresar</a>
+						<a class="btn" href="clientes.php">Regresar</a>
 					</div>					
 					 
 				</div>
