@@ -19,10 +19,7 @@
 				<!-- mostrar opciones -->
 				<h3 class="text-center">Menu</h3>
 				<div class="row">
-					     <a href="dashboard.php"><p class="text-center">Inicio</p></a>
-				</div>
-				<div class="row">
-          <a href="reservacion.php"><p class="text-center">Reservacion</p></a>
+					     <a href="index.php"><p class="text-center">Inicio</p></a>
 				</div>
 				<div class="row">
 					     <a href="clientes.php"><p class="text-center">Clientes</p></a>
@@ -90,12 +87,12 @@
 						<tbody>
 							<?php
 								$count = 0;
-								$sql = 'SELECT Factura.ID as ID, Cliente.Nombre as Nombre, Precio FROM Factura JOIN Cliente ON Factura.Cliente = Cliente.ID';
+								$sql = 'SELECT Factura.ID as ID, Cliente.Nombre as Nombre, Precio FROM Factura JOIN Cliente ON Factura.Cliente = Cliente.ID WHERE Hecha = false';
 					 			foreach ($pdo->query($sql) as $row) {
 									$count += 1;
 									echo '<tr><td>'.$row['Nombre'].'</td>';
 									echo '<td>'.$row['Precio'].'</td>';
-									echo '<td><button type="button" class="btn btn-danger" href="hecha.php?id='.$row['ID'].'">Hecho</button></td></tr>';
+									echo '<td><a class="btn btn-danger" href="hecha.php?id='.$row['ID'].'">Hecho</a></td></tr>';
 								}
 								Database::disconnect();
 							?>

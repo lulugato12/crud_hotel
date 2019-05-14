@@ -2,33 +2,37 @@
 
 	require 'database.php';
 
-		$f_idError = null;
-		$submError = null;
-		$marcError = null;
-		$acError   = null;
+		$clienteError = null;
+		$tipoError = null;
+		$pagoError = null;
+		$precioError   = null;
 		//$perError = null;
 
 	if ( !empty($_POST)) {
 
 		// keep track post values
-		$f_id = $_POST['f_id'];
-		$subm = $_POST['subm'];
-		$marc = $_POST['marc'];
-		$ac   = $_POST['ac'];
+		$cliente = $_POST['cliente'];
+		$tipo= $_POST['tipo'];
+		$pago = $_POST['pago'];
+		$precio   = $_POST['precio'];
 
 		// validate input
 		$valid = true;
 
-		if (empty($subm)) {
-			$submError = 'Porfavor escribe una submarca';
+		if (empty($cliente)) {
+			$clienteError = 'Porfavor selecciona el cliente';
 			$valid = false;
 		}
-		if (empty($marc)) {
-			$marcError = 'Porfavor escribe un id de marca';
+		if (empty($tipo)) {
+			$tipoError = 'Porfavor selecciona un tipo de factura';
 			$valid = false;
 		}
-		if (empty($ac)) {
-			$acError = 'Porfavor seleccione si el vehículo tiene aire acondicionado';
+		if (empty($pago)) {
+			$pagoError = 'Porfavor selecciona un metodo de pago';
+			$valid = false;
+		}
+    if (empty($precio)) {
+			$precioError = 'Porfavor escribe el precio';
 			$valid = false;
 		}
 
@@ -37,14 +41,10 @@
 			var_dump($_POST);
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			echo $ac;
-			if($ac=="S")
-				$sql = "INSERT INTO auto2 (idauto,nombrec,idmarca, ac) values(null, ?, ?, true)";
-			else
-				$sql = "INSERT INTO auto2 (idauto,nombrec,idmarca, ac) values(null, ?, ?, false)";
+			$sql = "INSERT INTO Factura (ID, Cliente, Precio, Tipo, Fecha_Generacion, Hecha, Metodo_pago) values(null, ?, ?, ?, CURRENT_DATE, false, ?)";
 			$q = $pdo->prepare($sql);
 
-			$q->execute(array($subm,$marc));
+			$q->execute(array($cliente, $precio, $tipo, $pago));
 			Database::disconnect();
 			header("Location: index.php");
 		}
@@ -64,52 +64,84 @@
 	    <div class="container">
 	    	<div class="span10 offset1">
 	    		<div class="row">
-		   			<h3>Agregar un auto nuevo</h3>
+		   			<h3>Agregar una factura</h3>
 		   		</div>
 
-				<form class="form-horizontal" action="create.php" method="post">
+				<form class="form-horizontal" action="facturaCreate.php" method="post">
 
-					<div class="control-group <?php echo !empty($submError)?'error':'';?>">
-						<label class="control-label">submarca</label>
-					    <div class="controls">
-					      	<input name="subm" type="text"  placeholder="submarca" value="<?php echo !empty($subm)?$subm:'';?>">
-					      	<?php if (($submError != null)) ?>
-					      		<span class="help-inline"><?php echo $submError;?></span>
-					    </div>
-					</div>
-
-					<div class="control-group <?php echo !empty($marcError)?'error':'';?>">
-				    	<label class="control-label">marca</label>
+          <div class="control-group <?php echo !empty($clienteError)?'error':'';?>">
+				    	<label class="control-label">Cliente</label>
 				    	<div class="controls">
-	                       	<select name ="marc">
-		                        <option value="">Selecciona una marca</option>
+	                       	<select name ="cliente">
+		                        <option value="">Selecciona un cliente</option>
 		                        <?php
 							   		$pdo = Database::connect();
-							   		$query = 'SELECT * FROM marca2';
+							   		$query = 'SELECT * FROM Cliente';
 			 				   		foreach ($pdo->query($query) as $row) {
-		                        		if ($row['idmarca']==$marc)
-		                        			echo "<option selected value='" . $row['idmarca'] . "'>" . $row['nombrem'] . "</option>";
+		                        		if ($row['ID']==$cliente)
+		                        			echo "<option selected value='" . $row['ID'] . "'>" . $row['Nombre'] . "</option>";
 		                        		else
-		                        			echo "<option value='" . $row['idmarca'] . "'>" . $row['nombrem'] . "</option>";
+		                        			echo "<option value='" . $row['ID'] . "'>" . $row['Nombre'] . "</option>";
 			   						}
 			   						Database::disconnect();
 			  					?>
                             </select>
-					      	<?php if (($marcError) != null) ?>
-					      		<span class="help-inline"><?php echo $perError;?></span>
+					      	<?php if (($clienteError) != null) ?>
+					      		<span class="help-inline"><?php echo $clienteError;?></span>
 						</div>
 					</div>
 
-					<div class="control-group <?php echo !empty($acError)?'error':'';?>">
-					    <label class="control-label">Aire Acondicionado ?</label>
-						    <div class="controls">
-	                    	    <input name="ac" type="radio" value="S"
-	                               	<?php $ac = null; echo ($ac == "S")?'checked':'';?> >Si</input> &nbsp;&nbsp;
-	                            <input name="ac" type="radio" value="N"
-	                              	<?php $ac=null; echo ($ac == "N")?'checked':'';?> >No</input>
-						       	<?php if (($acError != null)) ?>
-						      		<span class="help-inline"><?php echo $acError;?></span>
-						    </div>
+					<div class="control-group <?php echo !empty($precioError)?'error':'';?>">
+						<label class="control-label">Cantidad a facturar</label>
+					    <div class="controls">
+					      	<input name="precio" type="text"  placeholder="precio" value="<?php echo !empty($precio)?$precio:'';?>">
+					      	<?php if (($precioError != null)) ?>
+					      		<span class="help-inline"><?php echo $precioError;?></span>
+					    </div>
+					</div>
+
+					<div class="control-group <?php echo !empty($tipoError)?'error':'';?>">
+				    	<label class="control-label">Tipo de factura</label>
+				    	<div class="controls">
+	                       	<select name ="tipo">
+		                        <option value="">Selecciona el tipo</option>
+		                        <?php
+							   		$pdo = Database::connect();
+							   		$query = 'SELECT * FROM tipo_factura';
+			 				   		foreach ($pdo->query($query) as $row) {
+		                        		if ($row['ID']==$tipo)
+		                        			echo "<option selected value='" . $row['ID'] . "'>" . $row['Nombre'] . "</option>";
+		                        		else
+		                        			echo "<option value='" . $row['ID'] . "'>" . $row['Nombre'] . "</option>";
+			   						}
+			   						Database::disconnect();
+			  					?>
+                            </select>
+					      	<?php if (($tipoError) != null) ?>
+					      		<span class="help-inline"><?php echo $tipoError;?></span>
+						</div>
+					</div>
+
+          <div class="control-group <?php echo !empty($pagoError)?'error':'';?>">
+				    	<label class="control-label">Metodo de pago</label>
+				    	<div class="controls">
+	                       	<select name ="pago">
+		                        <option value="">Selecciona un metodo de pago</option>
+		                        <?php
+							   		$pdo = Database::connect();
+							   		$query = 'SELECT * FROM Metodo_pago';
+			 				   		foreach ($pdo->query($query) as $row) {
+		                        		if ($row['// IDEA: ']==$pago)
+		                        			echo "<option selected value='" . $row['ID'] . "'>" . $row['Nombre'] . "</option>";
+		                        		else
+		                        			echo "<option value='" . $row['ID'] . "'>" . $row['Nombre'] . "</option>";
+			   						}
+			   						Database::disconnect();
+			  					?>
+                            </select>
+					      	<?php if (($pagoError) != null) ?>
+					      		<span class="help-inline"><?php echo $pagoError;?></span>
+						</div>
 					</div>
 
 					<div class="form-actions">

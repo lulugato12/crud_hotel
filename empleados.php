@@ -12,21 +12,14 @@
 					<!-- cargar informacion del hotel -->
 					<h1>Bienvenido al Hotel</h1>
 				</div>
-				<div class="col-sm-4">
-					<!-- cargar informacion del usuario -->
-					<h3>Datos del usuario</h3>
-				</div>
 		</div>
 		<!-- cuerpo -->
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-sm-2">
 				<!-- mostrar opciones -->
 				<h3 class="text-center">Menu</h3>
 				<div class="row">
 					     <a href="index.php"><p class="text-center">Inicio</p></a>
-				</div>
-				<div class="row">
-          <a href="reservacion.php"><p class="text-center">Reservacion</p></a>
 				</div>
 				<div class="row">
 					     <a href="clientes.php"><p class="text-center">Clientes</p></a>
@@ -38,10 +31,11 @@
           <a href="inventarios.php"><p class="text-center">Inventarios</p></a>
 				</div>
 			</div>
-			<div class="col-sm-9">
+			<div class="col-sm-10">
 				<!-- mostrar informacion del hotel -->
-				<h3 class="text-center">Lista de empleados</h3>
-			
+				<div class="row">
+						<h3 class="text-center">Lista de empleados</h3>
+				</div>
 				<table class="table">
 				<thead>
  						<tr>
