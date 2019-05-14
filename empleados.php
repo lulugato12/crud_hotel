@@ -23,7 +23,7 @@
 				<!-- mostrar opciones -->
 				<h3 class="text-center">Menu</h3>
 				<div class="row">
-					     <a href="dashboard.php"><p class="text-center">Inicio</p></a>
+					     <a href="index.php"><p class="text-center">Inicio</p></a>
 				</div>
 				<div class="row">
           <a href="reservacion.php"><p class="text-center">Reservacion</p></a>
@@ -41,12 +41,12 @@
 			<div class="col-sm-9">
 				<!-- mostrar informacion del hotel -->
 				<h3 class="text-center">Lista de empleados</h3>
-			</div>
+			
 				<table class="table">
 				<thead>
  						<tr>
 			                	<th>Nombre	</th>
-			                	<th>RFC			</th>
+			                	<th>Area		</th>
 						<th>Opciones				</th>
 			                </tr>
 				</thead>
@@ -54,17 +54,18 @@
 					<?php
 						include 'database.php';
 						   	$pdo = Database::connect();
-						   	$sql = 'SELECT * FROM Cliente';
+						   	$sql = 'SELECT * FROM Trabajador natural join Area WHERE Trabajador.Area = Area.ID';
 		 				   	foreach ($pdo->query($sql) as $row) {
 								echo '<tr>';
 	    					   	echo '<td>'. $row['Nombre'] . '</td>';
-	    					  	echo '<td>';  echo ($row['RFC'])?$row['RFC']:"NO"; echo'</td>';
+							echo '<td>'. $row['Area'] . '</td>';
+	    					  	//echo '<td>';  echo ($row['RFC'])?$row['RFC']:"NO"; echo'</td>';
 										echo '<td width=250>';
-	    					   	echo '<a class="btn btn-sm" href="clienteRead.php?id='.$row['ID'].'">Detalles</a>';
+	    					   	echo '<a class="btn btn-sm" href="empleadosRead.php?id='.$row['ID'].'">Detalles</a>';
 	    					   	echo '&nbsp;';
-	    					  	echo '<a class="btn btn-success btn-sm" href="clienteUpdate.php?id='.$row['ID'].'">Actualizar</a>';
+	    					  	echo '<a class="btn btn-success btn-sm" href="empleadosUpdate.php?id='.$row['ID'].'">Actualizar</a>';
 	    					   	echo '&nbsp;';
-	    					   	echo '<a class="btn btn-danger btn-sm" href="clienteDelete.php?id='.$row['ID'].'">Eliminar</a>';
+	    					   	echo '<a class="btn btn-danger btn-sm" href="empleadosDelete.php?id='.$row['ID'].'">Eliminar</a>';
 	    					   	echo '</td>';
 							  	echo '</tr>';
 						    }
