@@ -15,14 +15,11 @@
 		</div>
 		<!-- cuerpo -->
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-sm-2">
 				<!-- mostrar opciones -->
 				<h3 class="text-center">Menu</h3>
 				<div class="row">
 					     <a href="index.php"><p class="text-center">Inicio</p></a>
-				</div>
-				<div class="row">
-          <a href="reservacion.php"><p class="text-center">Reservacion</p></a>
 				</div>
 				<div class="row">
 					     <a href="clientes.php"><p class="text-center">Clientes</p></a>
@@ -34,10 +31,18 @@
           <a href="inventarios.php"><p class="text-center">Inventarios</p></a>
 				</div>
 			</div>
-			<div class="col-sm-9">
+			<div class="col-sm-10">
 				<!-- mostrar informacion del hotel -->
-				<h3 class="text-center">Inventarios</h3>
-				
+				<div class="row">
+					<h3 class="text-center">Inventarios</h3>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-offset-4 col-sm-2">
+						<a class="btn btn-success" href="productoCreate.php">Agregar producto</a>
+					</div>
+				</div>
+
 				<h4 class="text-center">Lavanderia</h4>
 				<table class="table">
 				<thead>
@@ -58,8 +63,6 @@
 							echo '<td>'. $row['Cantidad'] . '</td>';
 	    					  	//echo '<td>';  echo ($row['RFC'])?$row['RFC']:"NO"; echo'</td>';
 										echo '<td width=250>';
-	    					   	
-							echo '<a class="btn btn-sm" href="clienteRead.php?id='.$row['ID'].'">Detalles</a>';
 	    					   	echo '&nbsp;';
 	    					  	echo '<a class="btn btn-success btn-sm" href="inventariosUpdate.php?id='.$row['ID'].'">Actualizar</a>';
 	    					   	echo '&nbsp;';
@@ -92,8 +95,6 @@
 							echo '<td>'. $row['Cantidad'] . '</td>';
 	    					  	//echo '<td>';  echo ($row['RFC'])?$row['RFC']:"NO"; echo'</td>';
 										echo '<td width=250>';
-	    					   	
-							echo '<a class="btn btn-sm" href="clienteRead.php?id='.$row['ID'].'">Detalles</a>';
 	    					   	echo '&nbsp;';
 	    					  	echo '<a class="btn btn-success btn-sm" href="inventariosUpdate.php?id='.$row['ID'].'">Actualizar</a>';
 	    					   	echo '&nbsp;';
@@ -126,8 +127,6 @@
 							echo '<td>'. $row['Cantidad'] . '</td>';
 	    					  	//echo '<td>';  echo ($row['RFC'])?$row['RFC']:"NO"; echo'</td>';
 										echo '<td width=250>';
-	    					   	
-							echo '<a class="btn btn-sm" href="clienteRead.php?id='.$row['ID'].'">Detalles</a>';
 	    					   	echo '&nbsp;';
 	    					  	echo '<a class="btn btn-success btn-sm" href="inventariosUpdate.php?id='.$row['ID'].'">Actualizar</a>';
 	    					   	echo '&nbsp;';

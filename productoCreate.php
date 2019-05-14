@@ -43,11 +43,13 @@
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "INSERT INTO Producto (ID, Nombre, Precio, Cantidad) values(null, ?, ?, ?)";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($nombre, $precio, $cantidad));
+			$q->execute(array($nombre, $precio, $cant));
 
       $sql = "SELECT ID FROM Producto WHERE Nombre = ?";
       $q = $pdo->prepare($sql);
-      $id = $q->fetch(PDO::FETCH_ASSOC);
+      $q->execute(array($nombre));
+      $data = $q->fetch(PDO::FETCH_ASSOC);
+      $id = $data['ID'];
 
       $sql = "INSERT INTO Inventario (Producto, Area) values(?, ?)";
       $q = $pdo->prepare($sql);
@@ -72,10 +74,10 @@
 	    <div class="container">
 	    	<div class="span10 offset1">
 	    		<div class="row">
-		   			<h3>Agregar un cliente nuevo</h3>
+		   			<h3>Agregar un producto</h3>
 		   		</div>
 
-				<form class="form-horizontal" action="clienteCreate.php" method="post">
+				<form class="form-horizontal" action="productoCreate.php" method="post">
 
 					<div class="control-group <?php echo !empty($nombreError)?'error':'';?>">
 						<label class="control-label">Nombre</label>
@@ -113,7 +115,7 @@
 							   		$pdo = Database::connect();
 							   		$query = 'SELECT * FROM area';
 			 				   		foreach ($pdo->query($query) as $row) {
-		                        		if ($row['ID']==$marc)
+		                        		if ($row['ID']==$area)
 		                        			echo "<option selected value='" . $row['ID'] . "'>" . $row['Nombre'] . "</option>";
 		                        		else
 		                        			echo "<option value='" . $row['ID'] . "'>" . $row['Nombre'] . "</option>";

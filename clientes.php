@@ -22,9 +22,6 @@
 					     <a href="index.php"><p class="text-center">Inicio</p></a>
 				</div>
 				<div class="row">
-          <a href="reservacion.php"><p class="text-center">Reservacion</p></a>
-				</div>
-				<div class="row">
 					     <a href="clientes.php"><p class="text-center">Clientes</p></a>
 				</div>
 				<div class="row">
