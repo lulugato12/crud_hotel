@@ -41,7 +41,7 @@
 				</div>
 				<div class="row">
 					<div class="col-sm-offset-4 col-sm-2">
-						<button type="button" class="btn btn-success btn-md">Agregar habitacion</button>
+						<button type="button" class="btn btn-success btn-md" href="">Agregar habitacion</button>
 					</div>
 				</div>
 				<div class="row">
