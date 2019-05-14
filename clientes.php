@@ -23,6 +23,9 @@
 				<!-- mostrar opciones -->
 				<h3 class="text-center">Menu</h3>
 				<div class="row">
+					     <a href="dashboard.php"><p class="text-center">Inicio</p></a>
+				</div>
+				<div class="row">
 					     <a href="clientes.php"><p class="text-center">Clientes</p></a>
 				</div>
 				<div class="row">
@@ -30,9 +33,6 @@
 				</div>
 				<div class="row">
           <a href="inventarios.php"><p class="text-center">Inventarios</p></a>
-				</div>
-				<div class="row">
-					<p class="text-center">Cerrar sesion</p>
 				</div>
 			</div>
 			<div class="col-sm-9">

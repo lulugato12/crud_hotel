@@ -12,7 +12,7 @@
         <h3 class="text-center">Inicia sesion</h3>
       </div>
       <div class="row">
-        <form class="form-horizontal" action="" method="post">
+        <form class="form-horizontal" action="ingresar.php" method="post">
           <div class="form-group">
             <label class="control-label col-sm-offset-1 col-sm-2" for="usuario">Usuario:</label>
             <div class="col-sm-6">

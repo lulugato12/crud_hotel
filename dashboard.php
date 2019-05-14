@@ -23,6 +23,9 @@
 				<!-- mostrar opciones -->
 				<h3 class="text-center">Menu</h3>
 				<div class="row">
+					     <a href="dashboard.php"><p class="text-center">Inicio</p></a>
+				</div>
+				<div class="row">
 					     <a href="clientes.php"><p class="text-center">Clientes</p></a>
 				</div>
 				<div class="row">
@@ -31,33 +34,20 @@
 				<div class="row">
           <a href="inventarios.php"><p class="text-center">Inventarios</p></a>
 				</div>
-				<div class="row">
-					<p class="text-center">Cerrar sesion</p>
-				</div>
 			</div>
 			<div class="col-sm-9">
 				<!-- mostrar informacion del hotel -->
 				<h3 class="text-center">Dashboard</h3>
 			</div>
 				<?php
-						/*include 'database.php';
-						   	$pdo = Database::connect();
-						   	$sql = 'SELECT * FROM auto2 natural join marca2 ORDER BY idauto';
-		 				   	foreach ($pdo->query($sql) as $row) {
-								echo '<tr>';
-	    					   	echo '<td>'. $row['nombrec'] . '</td>';
-	    					  	echo '<td>'. $row['nombrem'] . '</td>';
-	                            echo '<td>';    echo ($row['ac'])?"SI":"NO"; echo'</td>';
-	                            echo '<td width=250>';
-	    					   	echo '<a class="btn" href="read.php?id='.$row['idauto'].'">Detalles</a>';
-	    					   	echo '&nbsp;';
-	    					  	echo '<a class="btn btn-success" href="update.php?id='.$row['idauto'].'">Actualizar</a>';
-	    					   	echo '&nbsp;';
-	    					   	echo '<a class="btn btn-danger" href="delete.php?id='.$row['idauto'].'">Eliminar</a>';
-	    					   	echo '</td>';
-							  	echo '</tr>';
-						    }
-						   	Database::disconnect();*/
+					include 'database.php';
+					$pdo = Database::connect();
+					$sql = 'SELECT * FROM cliente';
+		 			foreach ($pdo->query($sql) as $row) {
+	    			echo $row['nombre'] . ' ';
+						echo $row['apellido']. '<br>';
+					}
+					Database::disconnect();
 				?>
 			</div>
 			<!-- pie de pagina -->
