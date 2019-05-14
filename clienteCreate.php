@@ -21,13 +21,13 @@
 			$valid = false;
 		}
 		if (empty($rfc)) {
-			$rfc = 'null';
+			$rfc = null;
 		}
 		if (empty($correo)) {
-			$correo = 'null';
+			$correo = null;
 		}
 		if (empty($tel)) {
-			$tel = 'null';
+			$tel = null;
 		}
 
 		// insert data
@@ -38,9 +38,9 @@
 			$sql = "INSERT INTO Cliente (ID, Nombre, Correo, RFC, Telefono) values(null, ?, ?, ?, ?)";
 			$q = $pdo->prepare($sql);
 
-			$q->execute(array($nombre, $correo, $rfc, $telefono));
+			$q->execute(array($nombre, $correo, $rfc, $tel));
 			Database::disconnect();
-			header("Location: clientes.php");
+			header('Location: clientes.php');
 		}
 	}
 ?>
@@ -66,7 +66,7 @@
 					<div class="control-group <?php echo !empty($nombreError)?'error':'';?>">
 						<label class="control-label">Nombre</label>
 					    <div class="controls">
-					      	<input name="nombre" type="text"  placeholder="nombre" value="<?php echo !empty(nombre)?nombre:'';?>">
+					      	<input name="nombre" type="text"  placeholder="nombre" >
 					      	<?php if (($nombreError != null)) ?>
 					      		<span class="help-inline"><?php echo $nombreError;?></span>
 					    </div>
@@ -95,7 +95,7 @@
 
 					<div class="form-actions">
 						<button type="submit" class="btn btn-success">Agregar</button>
-						<a class="btn" href="index.php">Regresar</a>
+						<a class="btn" href="clientes.php">Regresar</a>
 					</div>
 
 				</form>

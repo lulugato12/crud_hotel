@@ -41,7 +41,7 @@
 				</div>
 				<div class="row">
 					<div class="col-sm-offset-4 col-sm-2">
-						<button type="button" class="btn btn-success btn-md" href="">Agregar habitacion</button>
+						<a class="btn btn-success btn-md" href="habitacionCreate.php">Agregar habitacion</a>
 					</div>
 				</div>
 				<div class="row">
@@ -60,7 +60,6 @@
 								$sql = 'SELECT * FROM Habitacion';
 					 			foreach ($pdo->query($sql) as $row) {
 									echo '<tr><td>'.$row['ID'].'</td><td>';
-									echo $row['Disponible'] == 'true'?'Libre':'Ocupado';
 									echo '</td><td><button type="button" class="btn btn-primary">Check-in</button><button type="button" class="btn btn-success">Check-out</button><button type="button" class="btn btn-info">Detalles</button>';
 									echo '</td></tr>';
 								}
@@ -76,7 +75,7 @@
 				</div>
 				<div class="row">
 					<div class="col-sm-offset-3 col-sm-1">
-						<button type="button" class="btn btn-success btn-md">Agregar factura</button>
+						<a type="button" class="btn btn-success btn-md" href="facturaCreate.php">Agregar factura</a>
 					</div>
 				</div>
 				<div class="row">
