@@ -35,34 +35,17 @@
           <a href="inventarios.php"><p class="text-center">Inventarios</p></a>
 				</div>
 			</div>
-			
+
 			<div class="col-sm-9">
 				<!-- mostrar informacion del hotel -->
 				<h3 class="text-center">Lista de clientes</h3>
-			
+
 			<table class="table">
 				<thead>
-
-					<!--
-					<tr>
-						Nombre
-					</tr>
-					<tr>
-						RFC
-					</tr>
-					<tr>
-						Correo
-					</tr>
-					<tr>
-						Telefono
-					</tr>
-					<tr>
-						Opciones
-					</tr>-->
- 						<tr>		                 
+ 						<tr>
 			                	<th>Nombre	</th>
 			                	<th>RFC			</th>
-						<th>Opciones				</th>                          		                  
+						<th>Opciones				</th>
 			                </tr>
 				</thead>
 				<tbody>
@@ -87,7 +70,7 @@
 				?>
 				</tbody>
 			</table>
-				</div>   
+				</div>
 			</div>
 			<!-- pie de pagina -->
 			<div class="row">

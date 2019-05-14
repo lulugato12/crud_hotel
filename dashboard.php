@@ -26,6 +26,12 @@
 					     <a href="dashboard.php"><p class="text-center">Inicio</p></a>
 				</div>
 				<div class="row">
+          <a href="reservacion.php"><p class="text-center">Reservacion</p></a>
+				</div>
+				<div class="row">
+          <a href="ingresos.php"><p class="text-center">Ingresos</p></a>
+				</div>
+				<div class="row">
 					     <a href="clientes.php"><p class="text-center">Clientes</p></a>
 				</div>
 				<div class="row">
@@ -46,22 +52,28 @@
 					</div>
 				</div>
 				<div class="row">
-					<?php
-						include 'database.php';
-						$pdo = Database::connect();
-						$num = 0;
-						$sql = 'SELECT * FROM Habitacion';
-						foreach ($pdo->query($sql) as $row) {
-							$num += 1;
-							echo $num%6==0?'<div class="row">':'';
-							echo '<div class="col-sm-1"><p class="text-center">'.$row['ID'].'</p>';
-							echo $row['Limpio'] == 'true'?'':'<p class="text-center">Esta sucio</p>';
-							echo $row['Disponible'] == 'true'?'':'<p class="text-center">No esta disponible</p>';
-							echo '</div>';
-							echo $num%6==0?'</div>':'';
-						}
-						Database::disconnect();
-					?>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Habitacion</th>
+								<th>Disponible</th>
+								<th>Opciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+								include 'database.php';
+								$pdo = Database::connect();
+								$sql = 'SELECT * FROM Habitacion';
+					 			foreach ($pdo->query($sql) as $row) {
+									echo '<tr><td>'.$row['ID'].'</td>';
+									echo '<td>'.$row['Disponible'] == 'true'?'Libre':'Ocupado';
+									echo '</td><td><button type="button" class="btn btn-info">Detalles</button><button type="button" class="btn btn-danger">Hecha</button></td></tr>';
+								}
+								Database::disconnect();
+							?>
+						</tbody>
+					</table>
 				</div>
 			</div>
 			<div class="col-sm-4">
@@ -76,9 +88,11 @@
 				<div class="row">
 					<table class="table">
 						<thead>
-							<th>Cliente</th>
-							<th>Precio</th>
-							<th>Opciones</th>
+							<tr>
+								<th>Cliente</th>
+								<th>Precio</th>
+								<th>Opciones</th>
+							</tr>
 						</thead>
 						<tbody>
 							<?php
@@ -86,9 +100,9 @@
 								$sql = 'SELECT Factura.ID as ID, Cliente.Nombre as Nombre, Precio FROM Factura JOIN Cliente ON Factura.Cliente = Cliente.ID';
 					 			foreach ($pdo->query($sql) as $row) {
 									$count += 1;
-									echo '<tb>'.$row['Nombre'].'<tb>';
-									echo '<tb>'.$row['Precio'].'<tb>';
-									echo '<tb><button type="button" class="btn btn-info">Detalles</button><button type="button" class="btn btn-danger">Hecha</button>';
+									echo '<tr><td>'.$row['Nombre'].'</td>';
+									echo '<td>'.$row['Precio'].'</td>';
+									echo '<td><button type="button" class="btn btn-info">Detalles</button><button type="button" class="btn btn-danger">Hecha</button></td></tr>';
 								}
 								Database::disconnect();
 							?>
