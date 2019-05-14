@@ -44,15 +44,6 @@
 					</div>
 
 					<div class="control-group">
-					    <label class="control-label">Nombre</label>
-					    <div class="controls">
-					      	<label class="checkbox">
-						     	<?php echo $data['Nombre'];?>
-						    </label>
-					    </div>
-					</div>
-
-					<div class="control-group">
 					    <label class="control-label">RFC</label>
 					    <div class="controls">
 					      	<label class="checkbox">
@@ -79,6 +70,17 @@
 						    </label>
 					    </div>
 					</div>
+
+<!--
+					<div class="control-group">
+						<label class="control-label">aire acondicionado</label>
+					    <div class="controls">
+					      	<label class="checkbox">
+						    	<?php echo ($data['ac'])?"SI":"NO";?>
+						    </label>
+					    </div>
+					</div>
+					-->
 
 				    <div class="form-actions">
 						<a class="btn" href="clientes.php">Regresar</a>

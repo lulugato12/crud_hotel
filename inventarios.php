@@ -8,13 +8,9 @@
 		<div class="container">
 			<!-- cabeza -->
 			<div class="row">
-				<div class="col-sm-8">
+				<div class="col-sm-12">
 					<!-- cargar informacion del hotel -->
 					<h1>Bienvenido al Hotel</h1>
-				</div>
-				<div class="col-sm-4">
-					<!-- cargar informacion del usuario -->
-					<h3>Datos del usuario</h3>
 				</div>
 		</div>
 		<!-- cuerpo -->
@@ -23,7 +19,7 @@
 				<!-- mostrar opciones -->
 				<h3 class="text-center">Menu</h3>
 				<div class="row">
-					     <a href="dashboard.php"><p class="text-center">Inicio</p></a>
+					     <a href="index.php"><p class="text-center">Inicio</p></a>
 				</div>
 				<div class="row">
           <a href="reservacion.php"><p class="text-center">Reservacion</p></a>
@@ -41,10 +37,10 @@
 			<div class="col-sm-9">
 				<!-- mostrar informacion del hotel -->
 				<h3 class="text-center">Inventarios</h3>
-					
+
 			</div>
 
-			
+
 
 
 
